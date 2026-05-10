@@ -68,16 +68,14 @@ export function Navbar() {
           "max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between transition-all duration-300",
           navHeight
         )}>
-          <Link to="/" className="flex items-center gap-3 group">
-            <div
-              className="w-10 h-10 border border-[var(--color-brand-gold)] rounded-full flex items-center justify-center gold-pulse transition-shadow duration-300 group-hover:shadow-[0_0_30px_rgba(201,148,58,0.18)]"
-            >
-              <Logo className="w-6 h-6 text-[var(--color-brand-gold)]" />
+          <Link to="/" className="flex items-center gap-4 group">
+            <div className="w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+              <Logo className="w-full h-full" />
             </div>
-            <div className="hidden md:flex flex-col">
-              <span className="font-serif text-lg leading-none font-bold text-[var(--color-brand-gold)] tracking-wider">DON PEPE</span>
-              <span className="font-sans text-[9px] text-[var(--color-brand-goldlight)] tracking-[0.3em] font-semibold uppercase">BUSINESS GROUP</span>
-              <span className="font-sans text-[8px] text-[#7A6E60] tracking-wide mt-[-2px]">donpepebussinessgroup.com</span>
+            <div className="hidden md:flex flex-col border-l border-[var(--color-brand-gold)]/20 pl-4">
+              <span className="font-serif text-xl leading-none font-bold text-[var(--color-brand-gold)] tracking-wider">DON PEPE</span>
+              <span className="font-sans text-[10px] text-[var(--color-brand-goldlight)] tracking-[0.3em] font-semibold uppercase">BUSINESS GROUP</span>
+              <span className="font-sans text-[8px] text-[#7A6E60] tracking-wide mt-0.5">donpepebussinessgroup.com</span>
             </div>
           </Link>
 

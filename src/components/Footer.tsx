@@ -9,8 +9,8 @@ export function Footer() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 pt-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           <div className="flex flex-col items-start">
-            <div className="w-16 h-16 mb-6">
-              <Logo />
+            <div className="w-20 h-20 mb-6 transition-transform duration-300 hover:scale-105">
+              <Logo className="w-full h-full" />
             </div>
             <p className="font-serif italic text-xl text-[var(--color-brand-graylight)] max-w-sm">
               "Desde los años 70 construyendo tradición y trabajo"
