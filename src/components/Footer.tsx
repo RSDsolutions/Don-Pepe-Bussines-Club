@@ -22,6 +22,7 @@ export function Footer() {
               <h4 className="font-sans font-medium text-xs tracking-widest uppercase text-[var(--color-brand-gold)] mb-2">Compañía</h4>
               <Link to="/" className="font-sans text-sm text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors">Inicio</Link>
               <Link to="/historia" className="font-sans text-sm text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors">Historia</Link>
+              <Link to="/productos" className="font-sans text-sm text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors">Productos</Link>
               <Link to="/contacto" className="font-sans text-sm text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors">Contacto</Link>
             </div>
             <div className="flex flex-col gap-4">

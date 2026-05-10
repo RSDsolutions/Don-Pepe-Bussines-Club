@@ -85,7 +85,8 @@ export function Navbar() {
           <nav className="hidden md:flex items-center h-full gap-10">
             {[
               { label: "Inicio", path: "/" },
-              { label: "Historia", path: "/historia" }
+              { label: "Historia", path: "/historia" },
+              { label: "Productos", path: "/productos" }
             ].map((link) => (
               <Link
                 key={link.path}
@@ -194,6 +195,7 @@ export function Navbar() {
           {[
             { label: "Inicio", to: "/" },
             { label: "Historia", to: "/historia" },
+            { label: "Productos", to: "/productos" },
           ].map((link, i) => (
             <Link
               key={link.to}
