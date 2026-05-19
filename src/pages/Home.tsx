@@ -152,7 +152,7 @@ export function Home() {
 
           {/* DON PEPE — letter by letter */}
           <h1
-            className="hero-title-wave flex font-serif font-bold leading-none mb-4"
+            className="flex font-serif font-bold text-white leading-none mb-4"
             style={{
               fontSize: 'clamp(52px, 7.8vw, 100px)',
               letterSpacing: '0.07em',
@@ -165,7 +165,7 @@ export function Home() {
                 <span
                   key={i}
                   className="inline-block cursor-default"
-                  style={{ animation: `hero-letter-in 0.58s cubic-bezier(0.22,1,0.36,1) ${0.38 + i * 0.07}s both` }}
+                  style={{ animation: `hero-letter-in 0.58s cubic-bezier(0.22,1,0.36,1) ${0.38 + i * 0.07}s both, hero-gold-wave 3s ease-in-out ${1.5 + i * 0.18}s infinite` }}
                 >
                   {letter}
                 </span>
