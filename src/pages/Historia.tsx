@@ -72,7 +72,7 @@ function TimelineNode({ year, text, index, flip }: { year: string; text: string;
     <FadeIn delay={100 + staggerDelay(index)} className={`relative flex items-center ${flip ? "md:flex-row-reverse" : ""}`}>
       <div
         ref={dotRef}
-        className={`absolute left-[24px] md:left-1/2 w-4 h-4 bg-[var(--color-brand-gold)] rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(239,191,4,0.5)] ${pulsed ? "gold-pulse-3" : ""}`}
+        className={`absolute left-[24px] md:left-1/2 w-4 h-4 bg-[var(--color-brand-gold)] rounded-full -translate-x-1/2 shadow-[0_0_15px_rgba(239,184,16,0.5)] ${pulsed ? "gold-pulse-3" : ""}`}
       />
       <div className={`pl-16 md:pl-0 w-full md:w-1/2 flex flex-col ${flip ? "md:items-start md:pl-16" : "md:items-end md:pr-16 text-left md:text-right"}`}>
         <span className="font-serif font-bold text-[24px] text-[var(--color-brand-gold)]" style={{ fontVariantNumeric: 'tabular-nums' }}>

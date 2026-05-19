@@ -129,7 +129,7 @@ export function Home() {
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse, rgba(239,191,4,0.10) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse, rgba(239,184,16,0.10) 0%, transparent 70%)',
             transform: `translateX(calc(-50% + ${mousePos.x * 18}px)) translateY(${mousePos.y * 12}px)`,
             transition: 'transform 1.8s cubic-bezier(0.22,1,0.36,1)',
           }}
@@ -142,7 +142,7 @@ export function Home() {
           <div style={{ animation: 'hero-logo-enter 1.2s cubic-bezier(0.22,1,0.36,1) 0.2s both' }}>
             <div className="hero-logo-float w-[100px] h-[100px] md:w-[130px] md:h-[130px] mb-7">
               <div
-                style={{ filter: 'drop-shadow(0 4px 24px rgba(239,191,4,0.55)) brightness(1.08)' }}
+                style={{ filter: 'drop-shadow(0 4px 24px rgba(239,184,16,0.55)) brightness(1.08)' }}
                 className="w-full h-full"
               >
                 <Logo className="w-full h-full" />
@@ -335,7 +335,7 @@ export function Home() {
             <FadeIn key={to} delay={staggerDelay(i + 1)} direction="up" className="flex-1">
               <Link
                 to={to}
-                className={`group flex flex-col justify-center min-h-[160px] md:min-h-[200px] border border-[var(--color-brand-gold)]/10 md:border-y-0 md:border-t border-t-[var(--color-brand-gold)]/10 md:border-r px-8 md:px-12 cursor-pointer hover:bg-[rgba(239,191,4,0.06)] transition-colors border-l-[4px] ${border} relative overflow-hidden`}
+                className={`group flex flex-col justify-center min-h-[160px] md:min-h-[200px] border border-[var(--color-brand-gold)]/10 md:border-y-0 md:border-t border-t-[var(--color-brand-gold)]/10 md:border-r px-8 md:px-12 cursor-pointer hover:bg-[rgba(239,184,16,0.06)] transition-colors border-l-[4px] ${border} relative overflow-hidden`}
               >
                 <div className="flex flex-col mb-4 md:mb-0">
                   <span className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: `var(--color-brand-${accent.includes('gold') ? 'gold' : accent.includes('teal') ? 'teal' : 'graymuted'})` }}>{label}</span>
@@ -485,13 +485,13 @@ export function Home() {
                 href="https://wa.me/14073743951"
                 target="_blank"
                 rel="noreferrer"
-                className="bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(239,191,4,0.35)] inline-block"
+                className="bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(239,184,16,0.35)] inline-block"
               >
                 Escribir por WhatsApp
               </a>
               <a
                 href="mailto:info@donpepebussinessgroup.com"
-                className="border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:bg-[rgba(239,191,4,0.08)] inline-block"
+                className="border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:bg-[rgba(239,184,16,0.08)] inline-block"
               >
                 Enviar un Email
               </a>

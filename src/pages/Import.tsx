@@ -45,12 +45,12 @@ export function Import() {
               { name: "Especias naturales", desc: "El toque auténtico de nuestra tierra.", img: "https://images.pexels.com/photos/31437952/pexels-photo-31437952.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" }
             ].map((prod, i) => (
               <FadeIn key={prod.name} delay={staggerDelay(i)} direction="up">
-                <div className="group flex flex-col h-full bg-[var(--color-brand-navy)] border border-[var(--color-brand-goldmuted)]/50 transition-all duration-300 hover:border-[var(--color-brand-gold)] hover:shadow-[0_0_0_1px_rgba(239,191,4,0.6),0_16px_40px_rgba(239,191,4,0.08)]">
+                <div className="group flex flex-col h-full bg-[var(--color-brand-navy)] border border-[var(--color-brand-goldmuted)]/50 transition-all duration-300 hover:border-[var(--color-brand-gold)] hover:shadow-[0_0_0_1px_rgba(239,184,16,0.6),0_16px_40px_rgba(239,184,16,0.08)]">
                   <div className="h-[240px] relative overflow-hidden border-b border-[var(--color-brand-goldmuted)]/50">
                     <img src={prod.img} alt={prod.name} className="w-full h-full object-cover" loading="lazy" />
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: 'linear-gradient(to top, rgba(239,191,4,0.25), transparent)' }}
+                      style={{ background: 'linear-gradient(to top, rgba(239,184,16,0.25), transparent)' }}
                     />
                   </div>
                   <div className="p-8 flex-grow flex flex-col items-start gap-4">

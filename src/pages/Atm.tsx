@@ -20,7 +20,7 @@ function AtmIllustration() {
             <div className="w-3/4 h-1 bg-[var(--color-brand-gold)]/20 rounded-full" />
           </div>
           {/* Card slot */}
-          <div className="w-3/4 flex-shrink-0" style={{ height: '2px', background: 'rgba(239,191,4,0.4)', borderRadius: '2px' }} />
+          <div className="w-3/4 flex-shrink-0" style={{ height: '2px', background: 'rgba(239,184,16,0.4)', borderRadius: '2px' }} />
           {/* Keypad */}
           <div
             className="grid flex-shrink-0"

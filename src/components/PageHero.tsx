@@ -57,7 +57,7 @@ export function PageHero({ eyebrow, title, subtitle, imageUrl, imageAlt = "" }: 
       <div
         className="absolute top-0 left-1/2 w-[550px] h-[380px] pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse, rgba(239,191,4,0.10) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(239,184,16,0.10) 0%, transparent 70%)",
           transform: `translateX(calc(-50% + ${mousePos.x * 16}px)) translateY(${mousePos.y * 10}px)`,
           transition: "transform 1.8s cubic-bezier(0.22,1,0.36,1)",
         }}
