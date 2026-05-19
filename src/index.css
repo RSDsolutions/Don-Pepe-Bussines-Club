@@ -159,3 +159,51 @@ body {
 .anchor-watermark-reverse {
   animation: slow-spin-reverse 80s linear infinite;
 }
+
+/* ── Hero v2: split layout ── */
+
+/* Fine gold dot grid background */
+.hero-dot-grid {
+  background-image: radial-gradient(circle, rgba(201,148,58,0.18) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.45;
+}
+
+/* Logo entrance: scale + fade */
+@keyframes hero-logo-enter {
+  from { opacity: 0; transform: scale(0.78); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Logo perpetual float — translateY only, on a child element */
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-15px); }
+}
+.hero-logo-float {
+  animation: hero-float 5.5s ease-in-out 1.2s infinite;
+}
+
+/* Letter stagger for "DON PEPE" */
+@keyframes hero-letter-in {
+  from { opacity: 0; transform: translateY(65px); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+/* Gold underline draw */
+@keyframes hero-underline-draw {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Vertical divider fade in (scale Y from center) */
+@keyframes hero-divider-in {
+  from { opacity: 0; transform: scaleY(0); }
+  to   { opacity: 1; transform: scaleY(1); }
+}
+
+/* Decorative ring pulse */
+@keyframes hero-ring-breathe {
+  0%, 100% { transform: scale(1);    opacity: 1;   }
+  50%       { transform: scale(1.06); opacity: 0.5; }
+}

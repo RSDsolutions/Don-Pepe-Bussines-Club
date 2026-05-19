@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, Star } from "lucide-react";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
-import { AnchorMark } from "@/components/icons";
+import { AnchorMark, Logo } from "@/components/icons";
 
 function useCountUp(target: number, duration = 1500) {
   const [count, setCount] = useState(0);
@@ -45,6 +45,23 @@ export function Home() {
   const stat50 = useCountUp(50);
   const stat3 = useCountUp(3);
   const stat2 = useCountUp(2);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const heroSectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const el = heroSectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (e.clientY > rect.bottom) return;
+      setMousePos({
+        x: (e.clientX / window.innerWidth - 0.5) * 2,
+        y: (e.clientY / window.innerHeight - 0.5) * 2,
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   useEffect(() => {
     if (sessionStorage.getItem('scrollToEmpresas') === 'true') {
@@ -75,77 +92,175 @@ export function Home() {
 
   return (
     <div className="w-full">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[var(--color-brand-black)] pt-20">
+      {/* Hero Section — split layout */}
+      <section
+        ref={heroSectionRef}
+        className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[var(--color-brand-black)] pt-20"
+      >
+        {/* Dot grid */}
+        <div className="absolute inset-0 hero-dot-grid pointer-events-none" />
+
+        {/* Ambient gold blobs — parallax opposite direction */}
+        <div
+          className="absolute -top-48 -left-48 w-[700px] h-[700px] rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(201,148,58,0.09) 0%, transparent 65%)',
+            transform: `translate(${mousePos.x * 20}px, ${mousePos.y * 20}px)`,
+            transition: 'transform 1.6s cubic-bezier(0.22,1,0.36,1)',
+          }}
+        />
+        <div
+          className="absolute -bottom-48 -right-48 w-[550px] h-[550px] rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(201,148,58,0.06) 0%, transparent 65%)',
+            transform: `translate(${mousePos.x * -14}px, ${mousePos.y * -14}px)`,
+            transition: 'transform 2s cubic-bezier(0.22,1,0.36,1)',
+          }}
+        />
+
+        {/* Noise overlay */}
         <div className="noise-overlay" />
 
-        {/* Primary anchor watermark */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.12] pointer-events-none">
-          <AnchorMark className="w-[800px] h-[800px] anchor-watermark text-[#111111]" />
-        </div>
+        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-16 flex flex-col md:flex-row items-center gap-16 md:gap-0 min-h-[calc(100vh-80px)] py-24">
 
-        {/* Secondary smaller anchor — top right */}
-        <div className="absolute top-0 right-0 w-[200px] h-[200px] opacity-[0.08] pointer-events-none overflow-hidden">
-          <AnchorMark className="w-[200px] h-[200px] anchor-watermark-reverse text-[#111111]" />
-        </div>
+          {/* ── LEFT: Logo ── */}
+          <div className="md:w-[42%] flex items-center justify-center relative">
 
-        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 flex flex-col items-center flex-grow justify-center">
-          <div
-            className="flex items-center gap-4 mb-8"
-            style={{ animation: 'hero-line-in 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s both' }}
-          >
-            <div className="w-12 h-[1px] bg-[var(--color-brand-gold)]" />
-            <span className="font-sans font-medium text-[11px] tracking-[0.25em] text-[var(--color-brand-gold)] uppercase">
-              DESDE LOS AÑOS 70
-            </span>
-            <div className="w-12 h-[1px] bg-[var(--color-brand-gold)]" />
+            {/* Decorative rings — slower parallax */}
+            <div
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              style={{
+                transform: `translate(${mousePos.x * -16}px, ${mousePos.y * -16}px)`,
+                transition: 'transform 1.1s cubic-bezier(0.22,1,0.36,1)',
+              }}
+            >
+              <div
+                className="w-[280px] h-[280px] md:w-[360px] md:h-[360px] rounded-full border border-[var(--color-brand-gold)]/15"
+                style={{ animation: 'hero-ring-breathe 4s ease-in-out infinite' }}
+              />
+              <div
+                className="absolute w-[340px] h-[340px] md:w-[450px] md:h-[450px] rounded-full border border-[var(--color-brand-gold)]/08"
+                style={{ animation: 'hero-ring-breathe 4s ease-in-out 1.3s infinite' }}
+              />
+            </div>
+
+            {/* Parallax wrapper (no animation, only translate) */}
+            <div
+              style={{
+                transform: `translate(${mousePos.x * 10}px, ${mousePos.y * 10}px)`,
+                transition: 'transform 0.7s cubic-bezier(0.22,1,0.36,1)',
+              }}
+            >
+              {/* Entrance animation wrapper */}
+              <div style={{ animation: 'hero-logo-enter 1.1s cubic-bezier(0.22,1,0.36,1) 0.1s both' }}>
+                {/* Float animation wrapper */}
+                <div className="hero-logo-float w-[200px] h-[200px] md:w-[290px] md:h-[290px] lg:w-[330px] lg:h-[330px] relative">
+                  {/* Soft glow halo */}
+                  <div
+                    className="absolute inset-[-20%] rounded-full pointer-events-none"
+                    style={{ boxShadow: '0 0 80px 40px rgba(201,148,58,0.10)' }}
+                  />
+                  {/* Drop shadow via wrapper */}
+                  <div style={{ filter: 'drop-shadow(0 12px 40px rgba(201,148,58,0.22))' }} className="w-full h-full">
+                    <Logo className="w-full h-full" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="text-center mb-8">
-            <h1 className="font-serif font-bold text-[42px] md:text-[72px] lg:text-[100px] leading-[0.9] tracking-[-0.02em]">
-              <span
-                className="text-[var(--color-brand-offwhite)] block mb-1"
-                style={{ animation: 'hero-line-in 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s both' }}
-              >
-                From Tradition to
+          {/* ── DIVIDER ── */}
+          <div
+            className="hidden md:flex self-stretch items-center mx-8 lg:mx-14"
+            style={{ animation: 'hero-divider-in 1.1s cubic-bezier(0.22,1,0.36,1) 0.55s both' }}
+          >
+            <div className="w-[1px] h-[55%] bg-gradient-to-b from-transparent via-[var(--color-brand-gold)]/30 to-transparent" />
+          </div>
+
+          {/* ── RIGHT: Brand identity ── */}
+          <div className="md:w-[58%] flex flex-col items-center md:items-start text-center md:text-left">
+
+            {/* Eyebrow */}
+            <div
+              className="flex items-center gap-3 mb-8"
+              style={{ animation: 'hero-line-in 0.7s cubic-bezier(0.22,1,0.36,1) 0.3s both' }}
+            >
+              <div className="w-7 h-[1px] bg-[var(--color-brand-gold)]" />
+              <span className="font-sans font-semibold text-[10px] tracking-[0.32em] text-[var(--color-brand-gold)] uppercase">
+                Desde los años 70
               </span>
-              <span
-                className="gold-shimmer block"
-                style={{ animation: 'hero-line-in 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s both' }}
-              >
-                Global Business
-              </span>
+              <div className="w-7 h-[1px] bg-[var(--color-brand-gold)]" />
+            </div>
+
+            {/* DON PEPE — letter by letter */}
+            <h1
+              className="flex flex-wrap font-serif font-bold leading-[0.92] tracking-[-0.01em] text-[var(--color-brand-offwhite)] mb-4"
+              style={{ fontSize: 'clamp(58px, 7.5vw, 100px)' }}
+            >
+              {["D","O","N"," ","P","E","P","E"].map((letter, i) =>
+                letter === " " ? (
+                  <span key={i} className="w-[0.22em] inline-block" />
+                ) : (
+                  <span
+                    key={i}
+                    className="inline-block cursor-default transition-colors duration-300 hover:text-[var(--color-brand-gold)]"
+                    style={{ animation: `hero-letter-in 0.55s cubic-bezier(0.22,1,0.36,1) ${0.38 + i * 0.07}s both` }}
+                  >
+                    {letter}
+                  </span>
+                )
+              )}
             </h1>
-          </div>
 
-          <div
-            className="max-w-[700px] text-center mb-12"
-            style={{ animation: 'hero-line-in 0.8s cubic-bezier(0.22,1,0.36,1) 0.6s both' }}
-          >
-            <p className="font-sans text-[18px] md:text-lg text-[var(--color-brand-graylight)] leading-relaxed text-balance">
+            {/* BUSINESS GROUP with underline draw */}
+            <div
+              className="relative mb-10 self-center md:self-start"
+              style={{ animation: 'hero-line-in 0.7s cubic-bezier(0.22,1,0.36,1) 1s both' }}
+            >
+              <span className="font-sans font-medium text-[13px] md:text-[16px] tracking-[0.48em] text-[var(--color-brand-gold)] uppercase">
+                Business Group
+              </span>
+              <div
+                className="absolute -bottom-2 left-0 h-[1px]"
+                style={{
+                  background: 'linear-gradient(to right, var(--color-brand-gold), transparent)',
+                  animation: 'hero-underline-draw 0.9s cubic-bezier(0.22,1,0.36,1) 1.35s both',
+                }}
+              />
+            </div>
+
+            {/* Description */}
+            <p
+              className="font-sans text-[16px] md:text-[17px] text-[var(--color-brand-graylight)] leading-relaxed mb-10 max-w-[460px]"
+              style={{ animation: 'hero-line-in 0.7s cubic-bezier(0.22,1,0.36,1) 1.12s both' }}
+            >
               Un legado familiar que conecta Ecuador con el mundo. Tradición, calidad y visión internacional desde hace más de cinco décadas.
             </p>
-          </div>
 
-          <div
-            className="flex flex-col sm:flex-row gap-6"
-            style={{ animation: 'hero-line-in 0.8s cubic-bezier(0.22,1,0.36,1) 0.75s both' }}
-          >
-            <Link
-              to="/historia"
-              className="bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(201,148,58,0.35)] text-center"
+            {/* CTAs */}
+            <div
+              className="flex flex-col sm:flex-row gap-4"
+              style={{ animation: 'hero-line-in 0.7s cubic-bezier(0.22,1,0.36,1) 1.28s both' }}
             >
-              Conoce la Historia
-            </Link>
-            <a
-              href="#empresas"
-              className="border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:bg-[rgba(201,148,58,0.08)] text-center"
-            >
-              Nuestras Empresas
-            </a>
+              <Link
+                to="/historia"
+                className="relative overflow-hidden bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-10 py-4 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(201,148,58,0.4)] text-center group"
+              >
+                <span className="relative z-10">Conoce la Historia</span>
+                <span className="absolute inset-0 bg-[var(--color-brand-goldlight)] rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+              </Link>
+              <a
+                href="#empresas"
+                className="group border border-[var(--color-brand-gold)]/55 text-[var(--color-brand-gold)] px-10 py-4 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:border-[var(--color-brand-gold)] hover:bg-[rgba(201,148,58,0.07)] text-center flex items-center justify-center gap-2"
+              >
+                Nuestras Empresas
+                <ArrowRight size={13} className="group-hover:translate-x-1.5 transition-transform duration-300" />
+              </a>
+            </div>
           </div>
         </div>
 
+        {/* Bottom gold line */}
         <div className="absolute bottom-0 left-0 h-px bg-[var(--color-brand-gold)]/20 gold-line-anim" />
       </section>
 
