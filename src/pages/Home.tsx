@@ -96,7 +96,7 @@ export function Home() {
       <section
         ref={heroSectionRef}
         className="relative overflow-hidden"
-        style={{ height: '82vh', minHeight: '600px' }}
+        style={{ height: '100vh', minHeight: '600px' }}
       >
         {/* Background image — subtle parallax shift on mouse */}
         <div

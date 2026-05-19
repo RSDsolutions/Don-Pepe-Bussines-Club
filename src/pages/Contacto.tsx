@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent } from "react";
 import { FadeIn } from "@/components/FadeIn";
 import { Copy, Instagram, Linkedin, Facebook } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 
 export function Contacto() {
   const [formData, setFormData] = useState({
@@ -23,7 +24,14 @@ export function Contacto() {
 
   return (
     <div className="w-full bg-[var(--color-brand-black)]">
-      <section className="pt-32 pb-24 md:pt-48 md:pb-32 min-h-screen border-b border-[var(--color-brand-gold)]/20">
+      <PageHero
+        eyebrow="Hablemos"
+        title="CONTACTO"
+        subtitle="¿Listo para conectar con nosotros?"
+        imageUrl="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1920"
+        imageAlt="Equipo de negocios Don Pepe"
+      />
+      <section className="py-24 md:py-32 border-b border-[var(--color-brand-gold)]/20">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
             

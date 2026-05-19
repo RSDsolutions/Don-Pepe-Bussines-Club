@@ -1,67 +1,18 @@
 import { Link } from "react-router-dom";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
 import { Star } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 
 export function Seafood() {
   return (
     <div className="w-full bg-[var(--color-brand-black)]">
-      {/* Hero Section — overflow visible for wave effect */}
-      <section className="relative pt-32 pb-24 md:pt-48 md:pb-48 bg-[var(--color-brand-navy)]" style={{ overflow: 'visible' }}>
-        <div className="absolute left-0 top-0 bottom-0 w-1 md:w-2 bg-[var(--color-brand-teal)]" />
-
-        {/* Watermark contained */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center opacity-5">
-          <svg className="w-[800px] h-[800px] anchor-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.958 17.958 0 0112 21m0 0a17.958 17.958 0 01-8.716-6.747m0 0A8.959 8.959 0 013 12c0-.778.099-1.533.284-2.253" />
-          </svg>
-        </div>
-
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-16 relative z-10">
-          <div className="md:w-1/2">
-            <FadeIn>
-              <div className="flex items-center gap-4 mb-6">
-                <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-teal)] uppercase block">
-                  DON PEPE SEA FOOD
-                </span>
-                <div className="w-12 h-[1px] bg-[var(--color-brand-teal)]" />
-              </div>
-              <h1 className="font-serif font-bold text-[48px] md:text-[80px] text-[var(--color-brand-offwhite)] leading-[1.0] mb-6 text-balance">
-                Calidad del mar,<br /> para el mundo
-              </h1>
-              <p className="font-sans text-lg text-[var(--color-brand-graylight)] leading-relaxed mb-10 max-w-[500px]">
-                Mariscos premium extraídos de aguas ecuatorianas, procesados con las más altas exigencias internacionales para distribución en USA.
-              </p>
-              <Link
-                to="/contacto"
-                className="bg-[var(--color-brand-teal)] text-[var(--color-brand-navy)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(201,148,58,0.35)] inline-block"
-              >
-                Contactar ahora
-              </Link>
-            </FadeIn>
-          </div>
-          <div className="md:w-1/2 w-full">
-            <FadeIn direction="right" className="w-full h-[400px] md:h-[500px] relative overflow-hidden border border-[var(--color-brand-teal)]/30">
-              <img
-                src="https://images.pexels.com/photos/8352778/pexels-photo-8352778.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&dpr=1"
-                alt="Mariscos frescos del mercado ecuatoriano"
-                className="w-full h-full object-cover"
-                loading="eager"
-              />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(8,8,8,0.45) 0%, transparent 65%)' }} />
-            </FadeIn>
-          </div>
-        </div>
-
-        {/* Wave decoration at bottom */}
-        <div
-          className="absolute left-0 right-0 h-[60px] z-20 pointer-events-none"
-          style={{
-            bottom: '-1px',
-            background: 'var(--color-brand-navy)',
-            clipPath: 'ellipse(55% 40% at 50% 100%)',
-          }}
-        />
-      </section>
+      <PageHero
+        eyebrow="Don Pepe Sea Food"
+        title="SEA FOOD"
+        subtitle="Calidad del mar, para el mundo"
+        imageUrl="https://images.pexels.com/photos/8352778/pexels-photo-8352778.jpeg?auto=compress&cs=tinysrgb&w=1920"
+        imageAlt="Mariscos frescos del mercado ecuatoriano"
+      />
 
       {/* Quality Badges */}
       <section className="py-16 bg-[var(--color-brand-navy)]">

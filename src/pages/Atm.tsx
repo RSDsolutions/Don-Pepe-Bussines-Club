@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Star } from "lucide-react";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
+import { PageHero } from "@/components/PageHero";
 
 function AtmIllustration() {
   return (
@@ -52,39 +53,13 @@ function AtmIllustration() {
 export function Atm() {
   return (
     <div className="w-full bg-[var(--color-brand-black)]">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 md:pt-48 md:pb-48 overflow-hidden border-b border-[var(--color-brand-gold)]/20">
-        <div className="absolute left-0 top-0 bottom-0 w-1 md:w-2 bg-[var(--color-brand-gold)]" />
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-16 relative z-10">
-          <div className="md:w-1/2">
-            <FadeIn>
-              <div className="flex items-center gap-4 mb-6">
-                <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase block">
-                  DON PEPE ATM
-                </span>
-                <div className="w-12 h-[1px] bg-[var(--color-brand-gold)]" />
-              </div>
-              <h1 className="font-serif font-bold text-[48px] md:text-[80px] text-[var(--color-brand-offwhite)] leading-[1.0] mb-6 text-balance">
-                Tecnología financiera<br />con esencia humana
-              </h1>
-              <p className="font-sans text-[18px] md:text-[20px] text-[var(--color-brand-graylight)] leading-relaxed mb-10 max-w-[500px]">
-                Soluciones ATM modernas para negocios en Estados Unidos — respaldadas por décadas de confianza.
-              </p>
-              <Link
-                to="/contacto"
-                className="bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 inline-block"
-              >
-                Solicitar ATM
-              </Link>
-            </FadeIn>
-          </div>
-          <div className="md:w-1/2 w-full">
-            <FadeIn direction="right" className="w-full h-[400px] md:h-[500px]">
-              <AtmIllustration />
-            </FadeIn>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Don Pepe ATM"
+        title="ATM SOLUTIONS"
+        subtitle="Tecnología financiera con esencia humana"
+        imageUrl="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1920"
+        imageAlt="Servicios financieros y tecnología"
+      />
 
       {/* Services Grid */}
       <section className="py-24 md:py-32">

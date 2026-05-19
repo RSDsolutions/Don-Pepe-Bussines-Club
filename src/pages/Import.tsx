@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
 import { AnchorMark } from "@/components/icons";
 import { CheckCircle, Package, Globe, Award, Star } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 
 const features = [
   { Icon: CheckCircle, title: "Productos certificados", desc: "Cumplimos con todas las normativas de importación y exportación de Ecuador y USA." },
@@ -13,45 +14,13 @@ const features = [
 export function Import() {
   return (
     <div className="w-full bg-[var(--color-brand-black)]">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 md:pt-48 md:pb-48 overflow-hidden border-b border-[var(--color-brand-gold)]/20">
-        <div className="absolute left-0 top-0 bottom-0 w-1 md:w-2 bg-[var(--color-brand-gold)]" />
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-16 relative z-10">
-          <div className="md:w-1/2">
-            <FadeIn>
-              <div className="flex items-center gap-4 mb-6">
-                <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase block">
-                  DON PEPE IMPORT
-                </span>
-                <div className="w-12 h-[1px] bg-[var(--color-brand-gold)]" />
-              </div>
-              <h1 className="font-serif font-bold text-[48px] md:text-[80px] text-[var(--color-brand-offwhite)] leading-[1.0] mb-6 text-balance">
-                Calidad que cruza fronteras
-              </h1>
-              <p className="font-sans text-lg text-[var(--color-brand-graylight)] leading-relaxed mb-10 max-w-[500px]">
-                Exportamos lo mejor de Ecuador para el mundo — productos naturales, auténticos y certificados.
-              </p>
-              <Link
-                to="/contacto"
-                className="bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(201,148,58,0.35)] inline-block"
-              >
-                Contactar ahora
-              </Link>
-            </FadeIn>
-          </div>
-          <div className="md:w-1/2 w-full">
-            <FadeIn direction="right" className="w-full h-[400px] md:h-[500px] relative overflow-hidden border border-[var(--color-brand-gold)]/30">
-              <img
-                src="https://images.pexels.com/photos/32921658/pexels-photo-32921658.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&dpr=1"
-                alt="Productos ecuatorianos premium de exportación"
-                className="w-full h-full object-cover"
-                loading="eager"
-              />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(8,8,8,0.35) 0%, transparent 60%)' }} />
-            </FadeIn>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Don Pepe Import"
+        title="IMPORTACIÓN"
+        subtitle="Calidad que cruza fronteras"
+        imageUrl="https://images.pexels.com/photos/32921658/pexels-photo-32921658.jpeg?auto=compress&cs=tinysrgb&w=1920"
+        imageAlt="Productos ecuatorianos premium de exportación"
+      />
 
       {/* Products Grid */}
       <section className="py-24 md:py-32">

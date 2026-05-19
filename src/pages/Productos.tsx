@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, CreditCard, Fish, PackageCheck, ShieldCheck, Snowflake, Truck } from "lucide-react";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
 import { AnchorMark } from "@/components/icons";
+import { PageHero } from "@/components/PageHero";
 
 const exportProducts = [
   {
@@ -96,27 +97,13 @@ const standards = [
 export function Productos() {
   return (
     <div className="w-full bg-[var(--color-brand-black)]">
-      <section className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden border-b border-[var(--color-brand-gold)]/20">
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.08] pointer-events-none">
-          <AnchorMark className="w-[720px] h-[720px] anchor-watermark text-[#111111]" />
-        </div>
-        <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12">
-          <FadeIn className="max-w-[860px]">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase">
-                CATÁLOGO DIRECTO
-              </span>
-              <div className="w-12 h-[1px] bg-[var(--color-brand-gold)]" />
-            </div>
-            <h1 className="font-serif font-bold text-[48px] md:text-[80px] text-[var(--color-brand-offwhite)] leading-[1.0] mb-8 text-balance">
-              Productos del grupo,<br />listos para hacer negocio
-            </h1>
-            <p className="font-sans text-[18px] md:text-[20px] text-[var(--color-brand-graylight)] leading-relaxed max-w-[680px]">
-              Una vista directa de lo que ofrece Don Pepe Business Group: productos ecuatorianos de exportación, mariscos premium y soluciones ATM para comercios en Estados Unidos.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Catálogo Directo"
+        title="PRODUCTOS"
+        subtitle="Del grupo, listos para hacer negocio"
+        imageUrl="https://images.pexels.com/photos/4109751/pexels-photo-4109751.jpeg?auto=compress&cs=tinysrgb&w=1920"
+        imageAlt="Productos ecuatorianos premium"
+      />
 
       <section className="theme-dark py-16 bg-[var(--color-brand-navy)] border-b border-[var(--color-brand-gold)]/20">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-6">

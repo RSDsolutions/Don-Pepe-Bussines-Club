@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
 import { AnchorMark } from "@/components/icons";
+import { PageHero } from "@/components/PageHero";
 
 const donPepeImage = new URL("../../img/Don pepe.png", import.meta.url).href;
 
@@ -86,23 +87,13 @@ function TimelineNode({ year, text, index, flip }: { year: string; text: string;
 export function Historia() {
   return (
     <div className="w-full bg-[var(--color-brand-black)]">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden border-b border-[var(--color-brand-gold)]/20">
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none">
-          <AnchorMark className="w-[800px] h-[800px] anchor-watermark text-[var(--color-brand-navy)]" />
-        </div>
-
-        <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 text-center">
-          <FadeIn>
-            <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase mb-8 block">
-              THE STORY OF DON PEPE
-            </span>
-            <h1 className="font-serif font-bold text-[42px] md:text-[80px] text-[var(--color-brand-offwhite)] leading-[1.0] max-w-[800px] mx-auto text-balance">
-              De la tradición al<br />negocio global
-            </h1>
-          </FadeIn>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="The Story of Don Pepe"
+        title="HISTORIA"
+        subtitle="De la tradición al negocio global"
+        imageUrl="https://images.pexels.com/photos/17039185/pexels-photo-17039185.jpeg?auto=compress&cs=tinysrgb&w=1920"
+        imageAlt="Mercado tradicional ecuatoriano"
+      />
 
       {/* Opening Quote */}
       <section className="theme-dark py-24 bg-[var(--color-brand-navy)] border-y border-[var(--color-brand-gold)]/20">
