@@ -220,7 +220,7 @@ export function Productos() {
               </a>
               <Link
                 to="/contacto"
-                className="border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:bg-[rgba(201,148,58,0.08)]"
+                className="border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:bg-[rgba(239,191,4,0.08)]"
               >
                 Contacto comercial
               </Link>
@@ -248,7 +248,7 @@ function ProductCard({
           "group h-full overflow-hidden border transition-all duration-300",
           dark
             ? "bg-[var(--color-brand-navymid)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)]"
-            : "bg-[var(--color-brand-black)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)] hover:shadow-[0_16px_40px_rgba(201,148,58,0.08)]",
+            : "bg-[var(--color-brand-black)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)] hover:shadow-[0_16px_40px_rgba(239,191,4,0.08)]",
         ].join(" ")}
       >
         <div className="h-[250px] overflow-hidden relative">

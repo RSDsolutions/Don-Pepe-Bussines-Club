@@ -50,14 +50,14 @@ export function Seafood() {
             ].map((prod, i) => (
               <FadeIn key={prod.name} delay={staggerDelay(i)} direction="up">
                 <div
-                  className="group flex flex-col h-full bg-[var(--color-brand-navy)] border border-[var(--color-brand-teal)]/30 transition-all duration-300 hover:border-[var(--color-brand-teal)] hover:shadow-[0_0_0_1px_rgba(201,148,58,0.5),0_16px_40px_rgba(201,148,58,0.08)]"
+                  className="group flex flex-col h-full bg-[var(--color-brand-navy)] border border-[var(--color-brand-teal)]/30 transition-all duration-300 hover:border-[var(--color-brand-teal)] hover:shadow-[0_0_0_1px_rgba(239,191,4,0.5),0_16px_40px_rgba(239,191,4,0.08)]"
                   style={{ minHeight: '420px' }}
                 >
                   <div className="h-[240px] relative overflow-hidden border-b border-[var(--color-brand-teal)]/30">
                     <img src={prod.img} alt={prod.name} className="w-full h-full object-cover" loading="lazy" />
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: 'linear-gradient(to top, rgba(201,148,58,0.25), transparent)' }}
+                      style={{ background: 'linear-gradient(to top, rgba(239,191,4,0.25), transparent)' }}
                     />
                   </div>
                   <div className="p-10 flex-grow flex flex-col items-start gap-4">

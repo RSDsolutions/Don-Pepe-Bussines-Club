@@ -59,16 +59,9 @@ export function Footer() {
           <p className="font-serif italic text-[13px] text-[var(--color-brand-goldmuted)]">
             From Tradition to Global Business
           </p>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full text-center md:text-left">
-            <p className="font-sans text-xs text-[var(--color-brand-graymuted)]">
-              © 2026 Don Pepe Business Group · Ecuador & Estados Unidos
-            </p>
-            <div className="flex flex-wrap items-center gap-4 md:gap-8 justify-center">
-              <a href="mailto:donpepeimport@gmail.com" className="font-sans text-xs text-[var(--color-brand-goldmuted)] hover:text-[var(--color-brand-gold)] transition-colors">donpepeimport@gmail.com</a>
-              <a href="mailto:info@donpepeseafood.com" className="font-sans text-xs text-[var(--color-brand-goldmuted)] hover:text-[var(--color-brand-gold)] transition-colors">info@donpepeseafood.com</a>
-              <a href="mailto:info@donpepebussinessgroup.com" className="font-sans text-xs text-[var(--color-brand-goldmuted)] hover:text-[var(--color-brand-gold)] transition-colors">info@donpepebussinessgroup.com</a>
-            </div>
-          </div>
+          <p className="font-sans text-xs text-[var(--color-brand-graymuted)]">
+            © 2026 Don Pepe Business Group · Ecuador & Estados Unidos
+          </p>
         </div>
       </div>
     </footer>
