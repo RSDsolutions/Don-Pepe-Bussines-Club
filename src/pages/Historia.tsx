@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
 import { AnchorMark } from "@/components/icons";
 import { PageHero } from "@/components/PageHero";
+import { useLang } from "@/contexts/LangContext";
 
 const donPepeImage = new URL("../../img/Don pepe.png", import.meta.url).href;
 
@@ -85,20 +86,30 @@ function TimelineNode({ year, text, index, flip }: { year: string; text: string;
 }
 
 export function Historia() {
+  const { T } = useLang();
+  const t = T.historia;
+
+  const timeline = [
+    { year: t.timelineY1, text: t.timelineT1 },
+    { year: "1990s",      text: t.timelineT2 },
+    { year: "2010s",      text: t.timelineT3 },
+    { year: "2020",       text: t.timelineT4 },
+    { year: t.timelineY5, text: t.timelineT5 },
+  ];
+
   return (
     <div className="w-full bg-[var(--color-brand-black)]">
       <PageHero
-        eyebrow="The Story of Don Pepe"
-        title="HISTORIA"
-        subtitle="De la tradición al negocio global"
+        eyebrow={t.heroEyebrow}
+        title={t.heroTitle}
+        subtitle={t.heroSubtitle}
         imageUrl="https://images.pexels.com/photos/17039185/pexels-photo-17039185.jpeg?auto=compress&cs=tinysrgb&w=1920"
-        imageAlt="Mercado tradicional ecuatoriano"
+        imageAlt="Traditional Ecuadorian market"
       />
 
       {/* Opening Quote */}
       <section className="theme-dark py-24 bg-[var(--color-brand-navy)] border-y border-[var(--color-brand-gold)]/20">
         <div className="max-w-[700px] mx-auto px-6 text-center relative">
-          {/* Decorative quotation mark */}
           <span
             className="absolute top-0 left-8 font-serif leading-none select-none pointer-events-none"
             style={{ fontSize: '180px', color: 'var(--color-brand-gold)', opacity: 0.08, lineHeight: 1 }}
@@ -108,7 +119,7 @@ export function Historia() {
           </span>
           <FadeIn>
             <blockquote className="gold-shimmer font-serif italic text-[28px] md:text-[36px] leading-snug relative z-10">
-              "Su historia no nació en oficinas elegantes. Nació desde abajo, con sacrificio, humildad y el deseo de salir adelante para su familia."
+              {t.quote1}
             </blockquote>
           </FadeIn>
         </div>
@@ -124,29 +135,20 @@ export function Historia() {
               <FadeIn direction="left">
                 <span className="font-sans flex items-center gap-4 text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase mb-4">
                   <div className="w-8 h-[1px] bg-[var(--color-brand-gold)]" />
-                  ECUADOR · AÑOS 70
+                  {t.s1Eyebrow}
                 </span>
-                <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-offwhite)] mb-6">Todo comenzó aquí</h3>
-                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75] mb-6">
-                  Don Pepe inició su camino con nada más que sus manos y una visión inquebrantable. Las largas jornadas de trabajo no eran un obstáculo, sino el cimiento sobre el cual construiría el futuro de los suyos.
-                </p>
-                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75]">
-                  Cada grano sembrado y cada producto comerciado llevaba la estampa de la honestidad. La palabra dada era el único contrato necesario en aquellos tiempos, una filosofía que hasta hoy rige nuestro grupo.
-                </p>
+                <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-offwhite)] mb-6">{t.s1Heading}</h3>
+                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75] mb-6">{t.s1P1}</p>
+                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75]">{t.s1P2}</p>
               </FadeIn>
             </div>
             <div className="md:w-1/2 w-full">
               <FadeIn direction="right" className="w-full aspect-[4/5] max-h-[600px] border border-[var(--color-brand-gold)]/40 relative overflow-hidden mx-auto max-w-[500px]">
-                <img
-                  src={donPepeImage}
-                  alt="Retrato histórico de Don Pepe"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
+                <img src={donPepeImage} alt="Don Pepe historical portrait" className="w-full h-full object-cover" loading="lazy" />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(8,8,8,0.65) 0%, transparent 55%)' }} />
                 <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
                   <div className="w-12 h-[1px] bg-[var(--color-brand-gold)] opacity-70" />
-                  <span className="font-serif italic text-[14px] text-[var(--color-brand-goldlight)] whitespace-nowrap">Don Pepe · Años 70</span>
+                  <span className="font-serif italic text-[14px] text-[var(--color-brand-goldlight)] whitespace-nowrap">{t.s1PhotoLabel}</span>
                 </div>
               </FadeIn>
             </div>
@@ -158,7 +160,7 @@ export function Historia() {
               <FadeIn direction="left" className="w-full aspect-[4/5] max-h-[600px] border border-[var(--color-brand-gold)]/40 relative overflow-hidden mx-auto max-w-[500px]">
                 <img
                   src="https://images.pexels.com/photos/1211787/pexels-photo-1211787.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&dpr=1"
-                  alt="Puerto de carga y exportación marítima"
+                  alt="Maritime cargo port and export"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -169,15 +171,11 @@ export function Historia() {
               <FadeIn direction="right">
                 <span className="font-sans flex items-center gap-4 text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase mb-4">
                   <div className="w-8 h-[1px] bg-[var(--color-brand-gold)]" />
-                  LA EVOLUCIÓN
+                  {t.s2Eyebrow}
                 </span>
-                <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-offwhite)] mb-6">Expansión con propósito</h3>
-                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75] mb-6">
-                  Con el tiempo, el fruto del trabajo honesto comenzó a multiplicarse. La familia creció, y con ellos, la ambición de llevar lo mejor de nuestra tierra más allá de las fronteras locales.
-                </p>
-                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75]">
-                  La transición de un negocio local a una visión exportadora no nos hizo perder la esencia. Implementamos tecnología y procesos, pero mantuvimos intacto el respeto por el productor y la calidad.
-                </p>
+                <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-offwhite)] mb-6">{t.s2Heading}</h3>
+                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75] mb-6">{t.s2P1}</p>
+                <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75]">{t.s2P2}</p>
               </FadeIn>
             </div>
           </div>
@@ -188,25 +186,23 @@ export function Historia() {
               <div className="flex justify-center mb-4">
                 <span className="font-sans flex items-center gap-4 text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase">
                   <div className="w-8 h-[1px] bg-[var(--color-brand-gold)]" />
-                  HOY
+                  {t.s3Eyebrow}
                   <div className="w-8 h-[1px] bg-[var(--color-brand-gold)]" />
                 </span>
               </div>
-              <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-offwhite)] mb-6">Visión Internacional</h3>
-              <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75]">
-                Hoy, Don Pepe Business Group es sinónimo de excelencia ecuatoriana en Estados Unidos y el mundo. A través de nuestras divisiones operativas, continuamos tejiendo el puente entre la riqueza de nuestro origen y las demandas de los mercados globales, sin olvidar jamás de dónde venimos.
-              </p>
+              <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-offwhite)] mb-6">{t.s3Heading}</h3>
+              <p className="font-sans text-[16px] md:text-[18px] text-[var(--color-brand-graylight)] leading-[1.75]">{t.s3Body}</p>
             </FadeIn>
           </div>
 
         </div>
       </section>
 
-      {/* Values Display */}
+      {/* Values */}
       <section className="py-24 bg-[var(--color-brand-navy)] border-y border-[var(--color-brand-gold)]/20">
         <div className="max-w-[1000px] mx-auto px-6 md:px-12 flex flex-col gap-4">
-          {["Trabajo duro", "Disciplina", "Palabra", "Familia"].map((val, i) => (
-            <FadeIn key={val} delay={staggerDelay(i, 120)} direction="left">
+          {t.values.map((val, i) => (
+            <FadeIn key={i} delay={staggerDelay(i, 120)} direction="left">
               <div className="flex items-center gap-6 group/val cursor-default py-2">
                 <span
                   className="block h-[1px] bg-[var(--color-brand-gold)] flex-shrink-0 transition-[width] duration-300 ease-out group-hover/val:w-[120px]"
@@ -227,24 +223,10 @@ export function Historia() {
       {/* Timeline */}
       <section className="py-32">
         <div className="max-w-[800px] mx-auto px-6 relative">
-          {/* Center Line */}
           <div className="absolute left-[24px] md:left-1/2 top-0 bottom-0 w-[1px] bg-[var(--color-brand-gold)]/30 -translate-x-1/2" />
-
           <div className="flex flex-col gap-16">
-            {[
-              { year: "Años 70", text: "Inicios y fundación de los valores familiares" },
-              { year: "1990s", text: "Consolidación en el mercado local" },
-              { year: "2010s", text: "Primeras exportaciones a Norteamérica" },
-              { year: "2020", text: "Estructuración del Holding Empresarial" },
-              { year: "Hoy", text: "Expansión de servicios y diversificación en USA" }
-            ].map((node, i) => (
-              <TimelineNode
-                key={node.year}
-                year={node.year}
-                text={node.text}
-                index={i}
-                flip={i % 2 === 0}
-              />
+            {timeline.map((node, i) => (
+              <TimelineNode key={i} year={node.year} text={node.text} index={i} flip={i % 2 === 0} />
             ))}
           </div>
         </div>
@@ -255,16 +237,20 @@ export function Historia() {
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-0">
           <FadeIn direction="left">
             <div className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)] p-12 lg:p-24 flex flex-col justify-center min-h-[400px]">
-              <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase mb-4 block">Alma de la marca</span>
-              <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-offwhite)] mb-4">Nuestras raíces<br />y autenticidad</h3>
-              <p className="font-sans text-[var(--color-brand-graylight)]">La conexión con la tierra, el respeto al productor local y la preservación de la tradición ecuatoriana en todo lo que hacemos.</p>
+              <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase mb-4 block">{t.dualitySoulLabel}</span>
+              <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-offwhite)] mb-4">
+                {t.dualitySoulHeading.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br />}</span>)}
+              </h3>
+              <p className="font-sans text-[var(--color-brand-graylight)]">{t.dualitySoulBody}</p>
             </div>
           </FadeIn>
           <FadeIn direction="right">
             <div className="bg-[var(--color-brand-gold)] p-12 lg:p-24 flex flex-col justify-center min-h-[400px]">
-              <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-navy)] uppercase mb-4 block">Visión del futuro</span>
-              <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-navy)] mb-4">Crecimiento e<br />innovación internacional</h3>
-              <p className="font-sans text-[#4A3D22]">Estandarización de calidad, implementación tecnológica, apertura de nuevos mercados e inversiones continuas en Estados Unidos.</p>
+              <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-navy)] uppercase mb-4 block">{t.dualityVisionLabel}</span>
+              <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-navy)] mb-4">
+                {t.dualityVisionHeading.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br />}</span>)}
+              </h3>
+              <p className="font-sans text-[#4A3D22]">{t.dualityVisionBody}</p>
             </div>
           </FadeIn>
         </div>
@@ -275,7 +261,7 @@ export function Historia() {
         <div className="max-w-[800px] mx-auto px-6 text-center">
           <FadeIn direction="scale" duration={800}>
             <blockquote className="gold-shimmer font-serif italic text-[32px] md:text-[40px] leading-snug text-balance">
-              "Don Pepe no es solamente una marca. Es una historia de trabajo. De evolución. De raíces. De visión."
+              {t.quote2}
             </blockquote>
           </FadeIn>
         </div>

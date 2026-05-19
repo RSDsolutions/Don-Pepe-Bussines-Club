@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, Star } from "lucide-react";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
 import { AnchorMark, Logo } from "@/components/icons";
+import { useLang } from "@/contexts/LangContext";
 
 const heroImage = new URL("../../img/Don pepe oficina.png", import.meta.url).href;
 
@@ -41,6 +42,8 @@ function useCountUp(target: number, duration = 1500) {
 }
 
 export function Home() {
+  const { T } = useLang();
+  const t = T.home;
   const location = useLocation();
   const [lineVisible, setLineVisible] = useState(false);
   const lineRef = useRef<HTMLElement>(null);
@@ -192,7 +195,7 @@ export function Home() {
             style={{ animation: 'hero-line-in 0.7s cubic-bezier(0.22,1,0.36,1) 1.38s both' }}
           >
             <span className="font-sans text-[9px] md:text-[10px] tracking-[0.3em] text-white/45 uppercase">
-              Desde los años 70
+              {t.heroSince}
             </span>
           </div>
         </div>
@@ -206,9 +209,9 @@ export function Home() {
             <div className="max-w-[1440px] mx-auto px-4">
               <div className="flex flex-col md:flex-row items-stretch justify-center divide-y md:divide-y-0 md:divide-x divide-white/10">
                 {[
-                  { to: "/import",  label: "Don Pepe Import",    sub: "Ecuador · Importaciones" },
-                  { to: "/seafood", label: "Don Pepe Sea Food",  sub: "Mariscos · Exportación Premium" },
-                  { to: "/atm",     label: "Don Pepe ATM",       sub: "Servicios Financieros · USA" },
+                  { to: "/import",  label: "Don Pepe Import",    sub: t.importSub },
+                  { to: "/seafood", label: "Don Pepe Sea Food",  sub: t.seafoodSub },
+                  { to: "/atm",     label: "Don Pepe ATM",       sub: t.atmSub },
                 ].map(({ to, label, sub }) => (
                   <Link
                     key={to}
@@ -243,7 +246,7 @@ export function Home() {
               >
                 {stat50.count}+
               </div>
-              <div className="text-xs uppercase tracking-widest text-[var(--color-brand-graylight)] opacity-70">Años de trayectoria</div>
+              <div className="text-xs uppercase tracking-widest text-[var(--color-brand-graylight)] opacity-70">{t.statsYears}</div>
             </FadeIn>
             <div className="hidden md:block h-12 w-[1px] bg-[var(--color-brand-gold)]/20" />
             <FadeIn delay={staggerDelay(1)} className="text-center relative">
@@ -255,7 +258,7 @@ export function Home() {
               >
                 {stat3.count}
               </div>
-              <div className="text-xs uppercase tracking-widest text-[var(--color-brand-graylight)] opacity-70">Empresas del grupo</div>
+              <div className="text-xs uppercase tracking-widest text-[var(--color-brand-graylight)] opacity-70">{t.statsCompanies}</div>
             </FadeIn>
             <div className="hidden md:block h-12 w-[1px] bg-[var(--color-brand-gold)]/20" />
             <FadeIn delay={staggerDelay(2)} className="text-center relative">
@@ -267,7 +270,7 @@ export function Home() {
               >
                 {stat2.count}
               </div>
-              <div className="text-xs uppercase tracking-widest text-[var(--color-brand-graylight)] opacity-70">Países de operación</div>
+              <div className="text-xs uppercase tracking-widest text-[var(--color-brand-graylight)] opacity-70">{t.statsCountries}</div>
             </FadeIn>
           </div>
         </div>
@@ -279,16 +282,16 @@ export function Home() {
           <div className="md:w-[55%]">
             <FadeIn direction="left">
               <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase mb-6 block">
-                NUESTRA HISTORIA
+                {t.historyEyebrow}
               </span>
               <h2 className="font-serif font-bold text-[48px] md:text-[56px] text-[var(--color-brand-offwhite)] leading-[1.0] mb-8">
-                Una historia nacida<br />desde abajo
+                {t.historyHeading.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br />}</span>)}
               </h2>
               <p className="font-sans text-lg text-[var(--color-brand-graylight)] leading-relaxed mb-8">
-                Su historia no nació en oficinas elegantes. Nació con sacrificio, humildad y el inquebrantable deseo de salir adelante. Lo que comenzó como un esfuerzo familiar, hoy se consolida como un grupo empresarial que trasciende fronteras.
+                {t.historyBody}
               </p>
               <Link to="/historia" className="inline-flex items-center gap-2 font-sans font-semibold text-sm uppercase tracking-widest text-[var(--color-brand-gold)] hover:text-[var(--color-brand-goldlight)] transition-colors">
-                Leer la historia completa <ArrowRight size={18} />
+                {t.historyCta} <ArrowRight size={18} />
               </Link>
             </FadeIn>
           </div>
@@ -303,7 +306,7 @@ export function Home() {
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(8,8,8,0.65) 0%, rgba(8,8,8,0.15) 50%, transparent 100%)' }} />
               <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
                 <div className="w-16 h-[1px] bg-[var(--color-brand-gold)] opacity-70" />
-                <span className="font-serif italic text-[18px] text-[var(--color-brand-goldlight)] whitespace-nowrap">Ecuador · Años 70</span>
+                <span className="font-serif italic text-[18px] text-[var(--color-brand-goldlight)] whitespace-nowrap">{t.historyLabel}</span>
               </div>
             </FadeIn>
           </div>
@@ -315,22 +318,22 @@ export function Home() {
         <div className="max-w-[1440px] mx-auto w-full text-center mb-16">
           <FadeIn>
             <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase mb-6 block">
-              EL GRUPO
+              {t.groupEyebrow}
             </span>
             <h2 className="font-serif font-bold text-[48px] md:text-[56px] text-[var(--color-brand-offwhite)] leading-[1.0] mb-8">
-              Nuestras Empresas
+              {t.groupHeading}
             </h2>
             <p className="font-sans text-lg text-[var(--color-brand-graylight)] leading-relaxed max-w-[600px] mx-auto">
-              Un grupo construido sobre valores reales — tres empresas, una sola visión.
+              {t.groupBody}
             </p>
           </FadeIn>
         </div>
 
         <div className="max-w-[1440px] mx-auto w-full flex flex-col md:flex-row gap-6 md:gap-0 mt-8">
           {[
-            { to: "/import", accent: "var(--color-brand-gold)", label: "Import", text: "Productos ecuatorianos\nal mundo", border: "border-l-[var(--color-brand-gold)]" },
-            { to: "/seafood", accent: "var(--color-brand-teal)", label: "Sea Food", text: "Mariscos premium\nde exportación", border: "border-l-[var(--color-brand-teal)]" },
-            { to: "/atm", accent: "var(--color-brand-graymuted)", label: "ATM Solutions", text: "Servicios financieros\nen USA", border: "border-l-[var(--color-brand-graymuted)]" },
+            { to: "/import", accent: "var(--color-brand-gold)", label: t.importLabel, text: t.importText, border: "border-l-[var(--color-brand-gold)]" },
+            { to: "/seafood", accent: "var(--color-brand-teal)", label: t.seafoodLabel, text: t.seafoodText, border: "border-l-[var(--color-brand-teal)]" },
+            { to: "/atm", accent: "var(--color-brand-graymuted)", label: t.atmLabel, text: t.atmText, border: "border-l-[var(--color-brand-graymuted)]" },
           ].map(({ to, accent, label, text, border }, i) => (
             <FadeIn key={to} delay={staggerDelay(i + 1)} direction="up" className="flex-1">
               <Link
@@ -361,19 +364,19 @@ export function Home() {
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <FadeIn className="text-center mb-16">
             <span className="font-sans font-medium text-[11px] tracking-[0.2em] text-[var(--color-brand-gold)] uppercase">
-              LO QUE NOS DEFINE
+              {t.valoresEyebrow}
             </span>
           </FadeIn>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-            {["Confianza", "Esfuerzo", "Calidad", "Compromiso"].map((val, i) => (
+            {t.valores.map((val, i) => (
               <FadeIn key={val} delay={staggerDelay(i)} direction="up">
                 <span className="block font-serif italic text-[36px] md:text-[48px] text-[var(--color-brand-offwhite)] mb-2 hover:text-[var(--color-brand-gold)] transition-colors duration-[400ms] cursor-default group/val">
                   {val}
                   <span className="block h-[1px] bg-[var(--color-brand-gold)] origin-left scale-x-0 group-hover/val:scale-x-100 transition-transform duration-[400ms] ease-out mt-2 mx-auto w-3/4" />
                 </span>
                 <p className="font-sans text-[14px] text-[var(--color-brand-graylight)] max-w-[200px] mx-auto">
-                  Fundamento intocable de cada operación y relación de nuestro grupo.
+                  {t.valoresDesc}
                 </p>
               </FadeIn>
             ))}
@@ -414,42 +417,26 @@ export function Home() {
             </div>
 
             <p className="font-sans text-[18px] text-center text-[var(--color-brand-offwhite)] opacity-80">
-              Conectando dos mundos desde hace décadas.
+              {t.routeBody}
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* Testimonios */}
+      {/* Testimonials */}
       <section className="py-24 md:py-32 bg-[var(--color-brand-black)] border-t border-[var(--color-brand-gold)]/20">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <FadeIn className="text-center mb-16">
             <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase block mb-4">
-              TESTIMONIOS
+              {t.testimonialsEyebrow}
             </span>
             <h2 className="font-serif font-bold text-[36px] md:text-[48px] text-[var(--color-brand-offwhite)]">
-              Lo que dicen nuestros socios
+              {t.testimonialsHeading}
             </h2>
           </FadeIn>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                quote: "El compromiso de Don Pepe Import nos permitió asegurar una cadena de suministro constante para nuestra cadena de restaurantes.",
-                name: "Carlos Rivera",
-                role: "Director de Compras, Sabor Latino USA"
-              },
-              {
-                quote: "La calidad del camarón y la puntualidad en las entregas de Don Pepe Sea Food no tiene comparación en el mercado.",
-                name: "Maria González",
-                role: "CEO, Ocean Imports LLC"
-              },
-              {
-                quote: "Desde que instalamos los cajeros de Don Pepe ATM, la retención de efectivo en nuestro local aumentó un 40%.",
-                name: "David Kim",
-                role: "Propietario, K-Mart Express"
-              }
-            ].map((t, i) => (
+            {t.testimonials.map((tm, i) => (
               <FadeIn key={i} delay={staggerDelay(i)} direction="up">
                 <div className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)]/20 p-8 h-full flex flex-col justify-between hover:border-[var(--color-brand-gold)]/50 transition-colors">
                   <div>
@@ -459,12 +446,12 @@ export function Home() {
                       ))}
                     </div>
                     <blockquote className="font-serif italic text-2xl text-[var(--color-brand-offwhite)] leading-snug mb-8">
-                      "{t.quote}"
+                      "{tm.quote}"
                     </blockquote>
                   </div>
                   <div>
-                    <div className="font-sans text-[var(--color-brand-gold)] font-medium text-sm tracking-wide">{t.name}</div>
-                    <div className="font-sans text-xs text-[var(--color-brand-graylight)] mt-1">{t.role}</div>
+                    <div className="font-sans text-[var(--color-brand-gold)] font-medium text-sm tracking-wide">{tm.name}</div>
+                    <div className="font-sans text-xs text-[var(--color-brand-graylight)] mt-1">{tm.role}</div>
                   </div>
                 </div>
               </FadeIn>
@@ -473,12 +460,12 @@ export function Home() {
         </div>
       </section>
 
-      {/* Contacto CTA */}
+      {/* CTA */}
       <section id="contact" className="py-24 md:py-32 bg-[var(--color-brand-black)] border-t border-[var(--color-brand-gold)]">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 text-center">
           <FadeIn>
             <h2 className="font-serif font-bold text-[36px] md:text-[48px] text-[var(--color-brand-offwhite)] mb-12">
-              ¿Quieres hacer negocios con nosotros?
+              {t.ctaHeading}
             </h2>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <a
@@ -487,13 +474,13 @@ export function Home() {
                 rel="noreferrer"
                 className="bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(239,184,16,0.35)] inline-block"
               >
-                Escribir por WhatsApp
+                {t.ctaWhatsapp}
               </a>
               <a
                 href="mailto:info@donpepebussinessgroup.com"
                 className="border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] px-10 py-4 rounded-full text-sm font-semibold uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:bg-[rgba(239,184,16,0.08)] inline-block"
               >
-                Enviar un Email
+                {t.ctaEmail}
               </a>
             </div>
           </FadeIn>

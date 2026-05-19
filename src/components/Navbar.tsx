@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./icons";
+import { useLang } from "@/contexts/LangContext";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,6 +13,7 @@ export function Navbar() {
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
   const location = useLocation();
   const navigate = useNavigate();
+  const { lang, setLang, T } = useLang();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +58,12 @@ export function Navbar() {
   const navHeight = isScrolled ? "h-[64px]" : "h-[80px]";
   const dropdownTop = isScrolled ? "64px" : "80px";
 
+  const navLinks = [
+    { label: T.nav.home, path: "/" },
+    { label: T.nav.history, path: "/historia" },
+    { label: T.nav.products, path: "/productos" },
+  ];
+
   return (
     <>
       <header
@@ -87,11 +95,7 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center h-full gap-10">
-            {[
-              { label: "Inicio", path: "/" },
-              { label: "Historia", path: "/historia" },
-              { label: "Productos", path: "/productos" }
-            ].map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -108,7 +112,7 @@ export function Navbar() {
               </Link>
             ))}
 
-            {/* Dropdown Empresas */}
+            {/* Dropdown Companies */}
             <div
               className="relative h-full flex items-center"
               onMouseEnter={handleDropdownEnter}
@@ -118,7 +122,7 @@ export function Navbar() {
                 onClick={handleEmpresasClick}
                 className="font-sans text-sm font-medium text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors flex items-center gap-1"
               >
-                Empresas <ChevronDown size={14} className={cn("transition-transform duration-200", dropdownOpen && "rotate-180")} />
+                {T.nav.companies} <ChevronDown size={14} className={cn("transition-transform duration-200", dropdownOpen && "rotate-180")} />
               </button>
 
               <div
@@ -161,7 +165,7 @@ export function Navbar() {
                 isActive("/contacto") ? "text-[var(--color-brand-gold)]" : "text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)]"
               )}
             >
-              Contacto
+              {T.nav.contact}
               <span className={cn(
                 "absolute bottom-0 left-0 w-full h-[2px] bg-[var(--color-brand-gold)] transform origin-left transition-transform duration-[350ms]",
                 isActive("/contacto") ? "scale-x-100" : "scale-x-0"
@@ -169,12 +173,23 @@ export function Navbar() {
             </Link>
           </nav>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
+            {/* Language toggle */}
+            <button
+              onClick={() => setLang(lang === "es" ? "en" : "es")}
+              className="flex items-center gap-1 font-sans text-[11px] font-semibold tracking-wider select-none"
+              aria-label="Switch language"
+            >
+              <span className={lang === "es" ? "text-[var(--color-brand-gold)]" : "text-[var(--color-brand-graymuted)] hover:text-[var(--color-brand-graylight)] transition-colors"}>ES</span>
+              <span className="text-[var(--color-brand-graymuted)]/40 mx-0.5">|</span>
+              <span className={lang === "en" ? "text-[var(--color-brand-gold)]" : "text-[var(--color-brand-graymuted)] hover:text-[var(--color-brand-graylight)] transition-colors"}>EN</span>
+            </button>
+
             <button
               onClick={scrollToContact}
               className="gold-pulse px-8 py-2 rounded-full border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] text-xs font-semibold uppercase tracking-widest hover:bg-[var(--color-brand-gold)] hover:text-[var(--color-brand-navy)] transition-all duration-300 hover:scale-105"
             >
-              Contactar
+              {T.nav.contactBtn}
             </button>
           </div>
 
@@ -196,14 +211,10 @@ export function Navbar() {
         )}
       >
         <nav className="flex flex-col items-center w-full px-8 gap-6 max-h-[80vh]">
-          {[
-            { label: "Inicio", to: "/" },
-            { label: "Historia", to: "/historia" },
-            { label: "Productos", to: "/productos" },
-          ].map((link, i) => (
+          {navLinks.map((link, i) => (
             <Link
-              key={link.to}
-              to={link.to}
+              key={link.path}
+              to={link.path}
               className="w-full text-center py-4 text-3xl font-serif text-[var(--color-brand-offwhite)] hover:text-[var(--color-brand-gold)] border-b border-[var(--color-brand-gold)]/20"
               style={{
                 transition: 'all 0.4s cubic-bezier(0.22,1,0.36,1)',
@@ -225,7 +236,7 @@ export function Navbar() {
               transform: mobileMenuOpen ? "translateY(0)" : "translateY(20px)"
             }}
           >
-            <span className="text-3xl font-serif text-[var(--color-brand-offwhite)] mb-4">Empresas</span>
+            <span className="text-3xl font-serif text-[var(--color-brand-offwhite)] mb-4">{T.nav.companies}</span>
             <div className="flex flex-col items-center space-y-4">
               <Link to="/import" className="flex items-center gap-2 font-sans text-lg text-[var(--color-brand-gold)]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-gold)] flex-shrink-0" />
@@ -252,8 +263,24 @@ export function Navbar() {
               transform: mobileMenuOpen ? "translateY(0)" : "translateY(20px)"
             }}
           >
-            Contacto
+            {T.nav.contact}
           </Link>
+
+          {/* Language toggle mobile */}
+          <button
+            onClick={() => setLang(lang === "es" ? "en" : "es")}
+            className="flex items-center gap-2 font-sans text-sm font-semibold tracking-wider mt-2"
+            style={{
+              transition: 'all 0.4s cubic-bezier(0.22,1,0.36,1)',
+              transitionDelay: mobileMenuOpen ? "400ms" : "0ms",
+              opacity: mobileMenuOpen ? 1 : 0,
+              transform: mobileMenuOpen ? "translateY(0)" : "translateY(20px)"
+            }}
+          >
+            <span className={lang === "es" ? "text-[var(--color-brand-gold)]" : "text-[var(--color-brand-graymuted)]"}>ES</span>
+            <span className="text-[var(--color-brand-graymuted)]/40">|</span>
+            <span className={lang === "en" ? "text-[var(--color-brand-gold)]" : "text-[var(--color-brand-graymuted)]"}>EN</span>
+          </button>
         </nav>
       </div>
     </>

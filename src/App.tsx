@@ -12,9 +12,11 @@ import { Import } from "@/pages/Import";
 import { Seafood } from "@/pages/Seafood";
 import { Atm } from "@/pages/Atm";
 import { Contacto } from "@/pages/Contacto";
+import { LangProvider } from "@/contexts/LangContext";
 
 export default function App() {
   return (
+    <LangProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -28,5 +30,6 @@ export default function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </LangProvider>
   );
 }
