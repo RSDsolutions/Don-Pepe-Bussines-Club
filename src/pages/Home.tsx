@@ -165,7 +165,7 @@ export function Home() {
                 <span
                   key={i}
                   className="inline-block cursor-default"
-                  style={{ animation: `hero-letter-in 0.58s cubic-bezier(0.22,1,0.36,1) ${0.38 + i * 0.07}s both, hero-gold-wave 3s ease-in-out ${1.5 + i * 0.18}s infinite` }}
+                  style={{ animation: `hero-letter-in 0.58s cubic-bezier(0.22,1,0.36,1) ${0.38 + i * 0.07}s both, hero-gold-wave 4.5s linear ${1.8 + i * 0.09}s infinite` }}
                 >
                   {letter}
                 </span>
