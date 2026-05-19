@@ -4,6 +4,8 @@ import { ArrowRight, Star } from "lucide-react";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
 import { AnchorMark, Logo } from "@/components/icons";
 
+const heroImage = new URL("../../img/Don pepe oficina.png", import.meta.url).href;
+
 function useCountUp(target: number, duration = 1500) {
   const [count, setCount] = useState(0);
   const startedRef = useRef(false);
@@ -108,7 +110,7 @@ export function Home() {
           }}
         >
           <img
-            src="https://images.pexels.com/photos/1268855/pexels-photo-1268855.jpeg?auto=compress&cs=tinysrgb&w=1920"
+            src={heroImage}
             alt=""
             className="w-full h-full object-cover"
           />
