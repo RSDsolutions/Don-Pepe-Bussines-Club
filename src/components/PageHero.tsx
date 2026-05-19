@@ -83,7 +83,6 @@ export function PageHero({ eyebrow, title, subtitle, imageUrl, imageAlt = "" }: 
           style={{
             fontSize: "clamp(46px, 7vw, 92px)",
             letterSpacing: "0.07em",
-            textShadow: "0 2px 40px rgba(0,0,0,0.5)",
           }}
         >
           {letters.map((letter, i) =>
@@ -92,9 +91,9 @@ export function PageHero({ eyebrow, title, subtitle, imageUrl, imageAlt = "" }: 
             ) : (
               <span
                 key={i}
-                className="inline-block cursor-default transition-colors duration-300 hover:text-[var(--color-brand-goldlight)]"
+                className="inline-block cursor-default"
                 style={{
-                  animation: `hero-letter-in 0.55s cubic-bezier(0.22,1,0.36,1) ${0.3 + i * 0.06}s both`,
+                  animation: `hero-letter-in 0.55s cubic-bezier(0.22,1,0.36,1) ${0.3 + i * 0.06}s both, hero-gold-wave 4.5s linear ${1.6 + i * 0.09}s infinite`,
                 }}
               >
                 {letter}
