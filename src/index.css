@@ -216,6 +216,27 @@ body {
   50%       { transform: scale(1.06); opacity: 0.5; }
 }
 
+/* Hero title: gold shimmer wave that sweeps left→right in a loop */
+@keyframes hero-shimmer-wave {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+.hero-title-wave {
+  background: linear-gradient(
+    90deg,
+    #ffffff 28%,
+    #EFBF04 42%,
+    #F5D540 50%,
+    #EFBF04 58%,
+    #ffffff 72%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: hero-shimmer-wave 3.5s linear 1.5s infinite;
+}
+
 /* Scroll indicator bounce */
 @keyframes hero-scroll-bounce {
   0%, 100% { transform: translateY(0); }

@@ -152,11 +152,10 @@ export function Home() {
 
           {/* DON PEPE — letter by letter */}
           <h1
-            className="flex font-serif font-bold text-white leading-none mb-4"
+            className="hero-title-wave flex font-serif font-bold leading-none mb-4"
             style={{
               fontSize: 'clamp(52px, 7.8vw, 100px)',
               letterSpacing: '0.07em',
-              textShadow: '0 2px 48px rgba(0,0,0,0.55)',
             }}
           >
             {["D","O","N"," ","P","E","P","E"].map((letter, i) =>
@@ -165,7 +164,7 @@ export function Home() {
               ) : (
                 <span
                   key={i}
-                  className="inline-block cursor-default transition-colors duration-300 hover:text-[var(--color-brand-goldlight)]"
+                  className="inline-block cursor-default"
                   style={{ animation: `hero-letter-in 0.58s cubic-bezier(0.22,1,0.36,1) ${0.38 + i * 0.07}s both` }}
                 >
                   {letter}
