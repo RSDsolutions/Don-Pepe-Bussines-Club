@@ -3,7 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <title>Don Pepe Business Group</title>
+    <meta name="description" content="Don Pepe Business Group — Ecuadorian products, premium seafood, and ATM solutions across the United States. Building tradition since the '70s." />
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://donpepebussinessgroup.com/" />
+    <meta property="og:title" content="Don Pepe Business Group" />
+    <meta property="og:description" content="Ecuadorian products, premium seafood, and ATM solutions across the United States. Building tradition since the '70s." />
+    <meta property="og:image" content="https://images.pexels.com/photos/4109751/pexels-photo-4109751.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Don Pepe Business Group" />
+    <meta name="twitter:description" content="Ecuadorian products, premium seafood, and ATM solutions across the United States." />
+    <meta name="twitter:image" content="https://images.pexels.com/photos/4109751/pexels-photo-4109751.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+
+    <!-- GitHub Pages SPA routing: restores path from ?/ redirect -->
+    <script>
+      (function(l){
+        if(l.search[1]==='/'){
+          var decoded=l.search.slice(1).split('&').map(function(s){return s.replace(/~and~/g,'&')}).join('?');
+          window.history.replaceState(null,null,l.pathname.slice(0,-1)+decoded+l.hash);
+        }
+      }(window.location));
+    </script>
   </head>
   <body>
     <div id="root"></div>
