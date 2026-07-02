@@ -3,6 +3,7 @@ import { ArrowRight, Fish, PackageCheck, ShieldCheck, Snowflake, CreditCard, Tru
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
 import { PageHero } from "@/components/PageHero";
 import { useLang } from "@/contexts/LangContext";
+import { useCart } from "@/contexts/CartContext";
 
 const standardIcons = [PackageCheck, Snowflake, ShieldCheck];
 const atmIcons = [CreditCard, Truck, ShieldCheck];
@@ -178,6 +179,19 @@ function ProductCard({ name, desc, tag, img, delay, dark = false }: {
   name: string; desc: string; tag: string; img: string; delay: number; dark?: boolean;
 }) {
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  const { addToCart } = useCart();
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent navigation
+    addToCart({
+      id: slug,
+      name,
+      price: 120.00,
+      image: img,
+      quantity: 1,
+      tag
+    });
+  };
 
   return (
     <FadeIn delay={delay} direction="up">
@@ -204,12 +218,13 @@ function ProductCard({ name, desc, tag, img, delay, dark = false }: {
                 <span className="text-[10px] text-[var(--color-brand-graylight)] uppercase tracking-wider font-semibold mb-1">Por paca (50 uds)</span>
                 <span className="font-serif text-[24px] sm:text-[28px] text-[var(--color-brand-gold)] leading-none font-bold">$120.00</span>
               </div>
-              <div 
+              <button 
+                onClick={handleAdd}
                 className="flex items-center justify-center gap-1.5 bg-[var(--color-brand-gold)]/10 border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] group-hover:bg-[var(--color-brand-gold)] group-hover:text-[var(--color-brand-navy)] px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest transition-all"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
                 Añadir
-              </div>
+              </button>
             </div>
           </div>
         </article>

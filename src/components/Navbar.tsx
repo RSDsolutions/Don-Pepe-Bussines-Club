@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, type MouseEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./icons";
 import { useLang } from "@/contexts/LangContext";
+import { useCart } from "@/contexts/CartContext";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,6 +15,8 @@ export function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { lang, setLang, T } = useLang();
+  const { cartItems } = useCart();
+  const cartItemsCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -185,6 +188,15 @@ export function Navbar() {
               <span className={lang === "en" ? "text-[var(--color-brand-gold)]" : "text-[var(--color-brand-graymuted)] hover:text-[var(--color-brand-graylight)] transition-colors"}>EN</span>
             </button>
 
+            <Link to="/cart" className="relative text-[var(--color-brand-gold)] hover:text-[var(--color-brand-goldlight)] transition-colors mx-2">
+              <ShoppingCart size={22} />
+              {cartItemsCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                  {cartItemsCount}
+                </span>
+              )}
+            </Link>
+
             <button
               onClick={scrollToContact}
               className="gold-pulse px-8 py-2 rounded-full border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] text-xs font-semibold uppercase tracking-widest hover:bg-[var(--color-brand-gold)] hover:text-[var(--color-brand-navy)] transition-all duration-300 hover:scale-105"
@@ -193,13 +205,23 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            className="md:hidden text-[var(--color-brand-gold)] z-50"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          {/* Mobile Actions */}
+          <div className="md:hidden flex items-center gap-5 z-50">
+            <Link to="/cart" className="relative text-[var(--color-brand-gold)]">
+              <ShoppingCart size={24} />
+              {cartItemsCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+                  {cartItemsCount}
+                </span>
+              )}
+            </Link>
+            <button
+              className="text-[var(--color-brand-gold)]"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
       </header>
 
