@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, CheckCircle2, PackageCheck, Loader2 } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
 import { useLang } from "@/contexts/LangContext";
@@ -24,6 +24,7 @@ const getSlug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
 export function ProductDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { T } = useLang();
   
   // Find product in translations
@@ -82,7 +83,7 @@ export function ProductDetail() {
       setPacas(product.minOrder);
       return;
     }
-    setShowModal(true);
+    navigate("/checkout");
   };
 
   const confirmPayment = () => {

@@ -13,6 +13,7 @@ import { Seafood } from "@/pages/Seafood";
 import { Atm } from "@/pages/Atm";
 import { Contacto } from "@/pages/Contacto";
 import { ProductDetail } from "@/pages/ProductDetail";
+import { Checkout } from "@/pages/Checkout";
 import { LangProvider } from "@/contexts/LangContext";
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="atm" element={<Atm />} />
           <Route path="contacto" element={<Contacto />} />
           <Route path="producto/:id" element={<ProductDetail />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
       </Routes>
     </BrowserRouter>
