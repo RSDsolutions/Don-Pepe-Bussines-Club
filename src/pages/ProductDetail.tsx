@@ -1,9 +1,14 @@
 import { useState, useEffect, useRef } from "react";
+<<<<<<< HEAD
 import { createPortal } from "react-dom";
 import { useParams, Link } from "react-router-dom";
+=======
+import { useParams, Link, useNavigate } from "react-router-dom";
+>>>>>>> a2bfda22e28fe13427325c9f6877efd4c6494383
 import { ArrowLeft, CheckCircle2, PackageCheck, Loader2, ChevronLeft, ChevronRight, Star, Heart, Share2, Camera, Send, ShoppingCart, Tag as TagIcon, ShieldCheck, MapPin } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
 import { useLang } from "@/contexts/LangContext";
+import { useCart } from "@/contexts/CartContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -42,7 +47,9 @@ const StarRating = ({ rating, className }: { rating: number; className?: string 
 
 export function ProductDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { T } = useLang();
+  const { addToCart } = useCart();
   
   // Find product in translations
   let foundProduct = null;
@@ -193,7 +200,24 @@ export function ProductDetail() {
       setPacas(product.minOrder);
       return;
     }
-    setShowModal(true);
+    navigate("/checkout");
+  };
+
+  const handleAddToCart = () => {
+    if (pacas < product.minOrder) {
+      alert(`El pedido mínimo es de ${product.minOrder} pacas.`);
+      setPacas(product.minOrder);
+      return;
+    }
+    addToCart({
+      id: product.id || "unknown",
+      name: product.name,
+      price: product.pricePerPaca,
+      image: product.images[0],
+      quantity: pacas,
+      tag: product.tag
+    });
+    navigate("/cart");
   };
 
   const confirmPayment = () => {
@@ -368,13 +392,14 @@ export function ProductDetail() {
               {/* Desktop Buttons */}
               <div className="hidden lg:flex gap-4 mt-6">
                 <button 
-                  className="flex-1 border border-[var(--color-brand-gold)]/50 text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 px-8 py-4 rounded-full text-[13px] sm:text-sm font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 text-center"
+                  onClick={handleAddToCart}
+                  className="flex-1 border border-[var(--color-brand-gold)]/50 text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 px-8 py-4 rounded-none text-[13px] sm:text-sm font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 text-center"
                 >
                   <ShoppingCart className="h-4 w-4" /> Añadir al carrito
                 </button>
                 <button 
                   onClick={handleCheckoutClick}
-                  className="flex-1 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-8 py-4 rounded-full text-[13px] sm:text-sm font-semibold uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+                  className="flex-1 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-8 py-4 rounded-none text-[13px] sm:text-sm font-semibold uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
                 >
                   Comprar
                 </button>
