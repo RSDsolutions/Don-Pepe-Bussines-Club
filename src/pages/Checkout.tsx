@@ -169,8 +169,8 @@ export function Checkout() {
         />
       )}
 
-      <div className={`w-full min-h-screen bg-[var(--color-brand-black)] text-[var(--color-brand-graylight)] pt-14 pb-16 overflow-hidden ${currentStep === 3 ? 'print:hidden' : ''}`}>
-        <div className="max-w-[1200px] mx-auto px-6 relative">
+      <div className={`w-full min-h-screen bg-[var(--color-brand-black)] text-[var(--color-brand-graylight)] pt-14 pb-16 overflow-x-hidden ${currentStep === 3 ? 'print:hidden' : ''}`}>
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 relative">
           
           {/* Header */}
           <div className="relative flex flex-col items-center justify-center text-center mb-1 pt-2 pb-0">
@@ -207,7 +207,7 @@ export function Checkout() {
                   >
                     {currentStep > step ? <Check className="h-4 w-4" /> : <Icon className="h-4 w-4" />}
                   </div>
-                  <span className={`text-sm font-medium uppercase tracking-widest text-xs hidden sm:block ${currentStep >= step ? "text-[var(--color-brand-offwhite)]" : "text-[var(--color-brand-graylight)]"}`}>
+                  <span className={`text-sm font-medium uppercase tracking-widest hidden sm:block ${currentStep >= step ? "text-[var(--color-brand-offwhite)]" : "text-[var(--color-brand-graylight)]"}`}>
                     {label}
                   </span>
                 </div>
@@ -218,19 +218,19 @@ export function Checkout() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="flex flex-col-reverse lg:flex-row gap-12">
             
             {/* Main Content */}
-            <div className="lg:col-span-2 flex flex-col gap-8">
+            <div className="w-full lg:w-2/3 flex flex-col gap-8">
               
               <div className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)]/20 rounded-none flex flex-col gap-0">
-                  <div className="p-6 border-b border-[var(--color-brand-gold)]/20 bg-[var(--color-brand-navymid)]/30">
+                  <div className="p-4 sm:p-6 border-b border-[var(--color-brand-gold)]/20 bg-[var(--color-brand-navymid)]/30">
                     <h2 className="text-xl font-serif font-bold flex items-center gap-2 text-[var(--color-brand-offwhite)]">
                       <MapPin className="h-5 w-5 text-[var(--color-brand-gold)]" />
                       {t.shippingInfo}
                     </h2>
                   </div>
-                  <div className="p-6 flex flex-col gap-6">
+                  <div className="p-4 sm:p-6 flex flex-col gap-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-2">
                         <label className="text-sm font-semibold uppercase tracking-wider text-[var(--color-brand-graylight)]">{t.firstName}</label>
@@ -238,7 +238,7 @@ export function Checkout() {
                           <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--color-brand-gold)]" />
                           <input
                             type="text"
-                            className="w-full pl-10 pr-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none"
+                            className="w-full pl-10 pr-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none text-base"
                             placeholder="John"
                             value={shippingAddress.firstName}
                             onChange={(e) => handleAddressChange("firstName", e.target.value)}
@@ -249,7 +249,7 @@ export function Checkout() {
                         <label className="text-sm font-semibold uppercase tracking-wider text-[var(--color-brand-graylight)]">{t.lastName}</label>
                         <input
                           type="text"
-                          className="w-full px-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none"
+                          className="w-full px-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none text-base"
                           placeholder="Doe"
                           value={shippingAddress.lastName}
                           onChange={(e) => handleAddressChange("lastName", e.target.value)}
@@ -261,7 +261,7 @@ export function Checkout() {
                           <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--color-brand-gold)]" />
                           <input
                             type="email"
-                            className="w-full pl-10 pr-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none"
+                            className="w-full pl-10 pr-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none text-base"
                             placeholder="john@example.com"
                             value={shippingAddress.email}
                             onChange={(e) => handleAddressChange("email", e.target.value)}
@@ -274,7 +274,7 @@ export function Checkout() {
                           <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--color-brand-gold)]" />
                           <input
                             type="tel"
-                            className="w-full pl-10 pr-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none"
+                            className="w-full pl-10 pr-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none text-base"
                             placeholder="+1 (555) 123-4567"
                             value={shippingAddress.phone}
                             onChange={(e) => handleAddressChange("phone", e.target.value)}
@@ -287,7 +287,7 @@ export function Checkout() {
                       <label className="text-sm font-semibold uppercase tracking-wider text-[var(--color-brand-graylight)]">{t.address}</label>
                       <input
                         type="text"
-                        className="w-full px-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none"
+                        className="w-full px-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none text-base"
                         placeholder="123 Main Street"
                         value={shippingAddress.address}
                         onChange={(e) => handleAddressChange("address", e.target.value)}
@@ -299,7 +299,7 @@ export function Checkout() {
                         <label className="text-sm font-semibold uppercase tracking-wider text-[var(--color-brand-graylight)]">{t.city}</label>
                         <input
                           type="text"
-                          className="w-full px-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none"
+                          className="w-full px-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none text-base"
                           placeholder="New York"
                           value={shippingAddress.city}
                           onChange={(e) => handleAddressChange("city", e.target.value)}
@@ -323,7 +323,7 @@ export function Checkout() {
                         <label className="text-sm font-semibold uppercase tracking-wider text-[var(--color-brand-graylight)]">{t.zipCode}</label>
                         <input
                           type="text"
-                          className="w-full px-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none"
+                          className="w-full px-4 py-3 bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] transition-colors rounded-none text-base"
                           placeholder="10001"
                           value={shippingAddress.zipCode}
                           onChange={(e) => handleAddressChange("zipCode", e.target.value)}
@@ -353,10 +353,10 @@ export function Checkout() {
                             className="flex items-center p-4 cursor-pointer hover:bg-[var(--color-brand-navy)]"
                             onClick={() => setPaymentMethod('paypal')}
                           >
-                            <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[#00457C] text-white rounded-sm">
+                            <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[var(--color-brand-navy)] text-[var(--color-brand-gold)] rounded-sm">
                               <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.92a.641.641 0 0 1 .633-.543h6.927c3.299 0 5.049 1.587 4.54 4.672-.458 2.774-2.582 4.672-5.498 4.672H9.64a.641.641 0 0 0-.633.543l-1.93 12.073zm.886-5.554h2.584c4.378 0 7.155-2.022 7.82-5.901.542-3.176-.902-5.06-3.847-5.06H9.176a.641.641 0 0 0-.633.543L6.8 15.24a.641.641 0 0 0 .633.543z"/>
-                                <path fill="#0079C1" d="M10.51 21.337h4.606a.641.641 0 0 0 .633-.74l1.328-8.312a.641.641 0 0 1 .633-.543h1.906c2.916 0 5.04-1.898 5.498-4.672.338-2.046-.226-3.565-1.505-4.54l-1.306 8.163a.641.641 0 0 1-.633.543h-2.584c-4.378 0-7.155 2.022-7.82 5.901l-1.39 8.7z"/>
+                                <path fill="currentColor" d="M10.51 21.337h4.606a.641.641 0 0 0 .633-.74l1.328-8.312a.641.641 0 0 1 .633-.543h1.906c2.916 0 5.04-1.898 5.498-4.672.338-2.046-.226-3.565-1.505-4.54l-1.306 8.163a.641.641 0 0 1-.633.543h-2.584c-4.378 0-7.155 2.022-7.82 5.901l-1.39 8.7z"/>
                               </svg>
                             </div>
                             <div className="ml-4 flex-grow">
@@ -374,10 +374,10 @@ export function Checkout() {
                           
                           {/* Expanded Content: PayPal Buttons */}
                           {paymentMethod === 'paypal' && (
-                            <div className="p-4 border-t border-[var(--color-brand-gold)]/20 bg-[var(--color-brand-offwhite)] relative z-0">
+                            <div className="p-4 border-t border-[var(--color-brand-gold)]/20 bg-transparent relative z-0">
                               <PayPalButtons 
                                 fundingSource="paypal"
-                                style={{ layout: "vertical", shape: "rect", color: "blue" }} 
+                                style={{ layout: "vertical", shape: "rect", color: "gold" }} 
                                 createOrder={(data, actions) => {
                                   return actions.order.create({
                                     intent: "CAPTURE",
@@ -420,10 +420,10 @@ export function Checkout() {
 
                           {/* Expanded Content: Credit Card Form */}
                           {paymentMethod === 'card' && (
-                            <div className="p-4 border-t border-[var(--color-brand-gold)]/20 bg-[var(--color-brand-offwhite)] relative z-0">
+                            <div className="p-4 border-t border-[var(--color-brand-gold)]/20 bg-transparent relative z-0">
                               <PayPalButtons 
                                 fundingSource="card"
-                                style={{ layout: "vertical", shape: "rect", color: "black" }} 
+                                style={{ layout: "vertical", shape: "rect", color: "gold" }} 
                                 createOrder={(data, actions) => {
                                   return actions.order.create({
                                     intent: "CAPTURE",
@@ -442,8 +442,8 @@ export function Checkout() {
             </div>
 
             {/* Sidebar */}
-            <div className="flex flex-col gap-6 w-full shrink-0">
-              <div className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)]/30 p-8 rounded-none flex flex-col gap-6 sticky top-24">
+            <div className="w-full lg:w-1/3 flex flex-col gap-6 shrink-0">
+              <div className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)]/30 p-4 sm:p-8 rounded-none flex flex-col gap-6 lg:sticky top-24">
                 <h3 className="font-serif font-bold text-[24px] flex items-center gap-2 text-[var(--color-brand-offwhite)] border-b border-[var(--color-brand-gold)]/20 pb-4">
                   <ShoppingBag className="h-5 w-5 text-[var(--color-brand-gold)]" />
                   {t.orderSummary}

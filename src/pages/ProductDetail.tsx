@@ -196,6 +196,14 @@ export function ProductDetail() {
       setPacas(product.minOrder);
       return;
     }
+    addToCart({
+      id: product.id || "unknown",
+      name: product.name,
+      price: product.pricePerPaca,
+      image: product.images[0],
+      quantity: pacas,
+      tag: product.tag
+    });
     navigate("/checkout");
   };
 
@@ -389,13 +397,13 @@ export function ProductDetail() {
               <div className="hidden lg:flex gap-4 mt-6">
                 <button 
                   onClick={handleAddToCart}
-                  className="flex-1 border border-[var(--color-brand-gold)]/50 text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 px-8 py-4 rounded-none text-[13px] sm:text-sm font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 text-center"
+                  className="flex-1 border border-[var(--color-brand-gold)]/50 text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 px-8 py-4 rounded-none text-[13px] sm:text-sm font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 text-center cursor-pointer"
                 >
                   <ShoppingCart className="h-4 w-4" /> Añadir al carrito
                 </button>
                 <button 
                   onClick={handleCheckoutClick}
-                  className="flex-1 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-8 py-4 rounded-none text-[13px] sm:text-sm font-semibold uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+                  className="flex-1 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-8 py-4 rounded-none text-[13px] sm:text-sm font-semibold uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   Comprar
                 </button>
@@ -579,13 +587,14 @@ export function ProductDetail() {
         >
           <div className="flex gap-4 justify-between items-center">
             <button 
-              className="flex-1 border border-[var(--color-brand-gold)]/50 text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 px-4 py-3 rounded-full text-[12px] sm:text-[13px] font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 text-center"
+              onClick={handleAddToCart}
+              className="flex-1 border border-[var(--color-brand-gold)]/50 text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 px-4 py-3 rounded-full text-[12px] sm:text-[13px] font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 text-center cursor-pointer"
             >
               <ShoppingCart className="h-4 w-4 shrink-0" /> Añadir
             </button>
             <button 
               onClick={handleCheckoutClick}
-              className="flex-1 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-4 py-3 rounded-full text-[12px] sm:text-[13px] font-semibold uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+              className="flex-1 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-4 py-3 rounded-full text-[12px] sm:text-[13px] font-semibold uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               Comprar
             </button>

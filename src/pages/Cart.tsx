@@ -104,7 +104,7 @@ export function Cart() {
             <div className="flex-1 flex flex-col">
               
               {/* Table Header */}
-              <div className="grid grid-cols-12 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] py-4 px-6 font-semibold uppercase tracking-wider text-sm mb-6 rounded-none">
+              <div className="hidden md:grid grid-cols-12 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] py-4 px-6 font-semibold uppercase tracking-wider text-sm mb-6 rounded-none">
                 <div className="col-span-6">{t.product}</div>
                 <div className="col-span-2 text-center">{t.price}</div>
                 <div className="col-span-2 text-center">{t.quantity}</div>
@@ -114,56 +114,62 @@ export function Cart() {
               {/* Cart Items List */}
               <div className="flex flex-col gap-6 mb-8">
                 {cartItems.map((item) => (
-                  <div key={item.id} className="grid grid-cols-12 items-center bg-[var(--color-brand-navy)] p-4 border border-[var(--color-brand-gold)]/20 rounded-none group">
-                    <div className="col-span-6 flex items-center gap-4">
+                  <div key={item.id} className="flex flex-col md:grid md:grid-cols-12 items-center md:items-start bg-[var(--color-brand-navy)] p-4 border border-[var(--color-brand-gold)]/20 rounded-none group gap-4 md:gap-0">
+                    <div className="w-full md:col-span-6 flex items-start md:items-center gap-4 relative">
                       <button 
                         onClick={() => removeFromCart(item.id)}
-                        className="text-[var(--color-brand-graylight)] hover:text-red-500 transition-colors p-2"
+                        className="absolute right-0 top-0 md:relative text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors p-3 md:p-2 cursor-pointer"
                         aria-label="Remove item"
                       >
-                        <X size={18} />
+                        <X size={20} />
                       </button>
-                      <div className="w-20 h-24 overflow-hidden bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/20 shrink-0">
+                      <div className="w-24 h-28 md:w-20 md:h-24 overflow-hidden bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/20 shrink-0">
                         <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
-                      <div className="flex flex-col gap-1 pr-4">
-                        <h3 className="font-serif font-bold text-[20px] text-[var(--color-brand-offwhite)] leading-tight">{item.name}</h3>
+                      <div className="flex flex-col gap-1 pr-12 md:pr-4 pt-1 md:pt-0">
+                        <h3 className="font-serif font-bold text-[18px] md:text-[20px] text-[var(--color-brand-offwhite)] leading-tight">{item.name}</h3>
                         <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-gold)]">
                           {item.tag}
+                        </span>
+                        {/* Show price under name on mobile */}
+                        <span className="md:hidden text-[var(--color-brand-offwhite)] font-serif text-[18px] mt-2">
+                          ${item.price.toFixed(2)}
                         </span>
                       </div>
                     </div>
                     
-                    <div className="col-span-2 text-center text-[var(--color-brand-offwhite)] font-serif text-[18px]">
+                    <div className="hidden md:block col-span-2 text-center text-[var(--color-brand-offwhite)] font-serif text-[18px] self-center">
                       ${item.price.toFixed(2)}
                     </div>
                     
-                    <div className="col-span-2 flex justify-center">
-                      <div className="flex items-center border border-[var(--color-brand-gold)]/30 h-10 w-[100px] bg-[var(--color-brand-navymid)] rounded-none">
+                    <div className="w-full md:w-auto md:col-span-2 flex justify-between md:justify-center items-center border-t border-[var(--color-brand-gold)]/10 md:border-t-0 pt-4 md:pt-0 mt-2 md:mt-0 self-center">
+                      <span className="md:hidden text-xs uppercase text-[var(--color-brand-graylight)] tracking-widest">{t.quantity}</span>
+                      <div className="flex items-center border border-[var(--color-brand-gold)]/30 h-12 md:h-10 w-[120px] md:w-[100px] bg-[var(--color-brand-navymid)] rounded-none">
                         <button 
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="w-8 h-full flex items-center justify-center text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 transition-colors"
+                          className="w-10 md:w-8 h-full flex items-center justify-center text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 transition-colors cursor-pointer"
                         >
-                          <Minus size={14} />
+                          <Minus size={16} />
                         </button>
                         <input 
                           type="number"
                           min="1"
                           value={item.quantity}
                           onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
-                          className="w-full text-center bg-transparent text-[var(--color-brand-offwhite)] font-sans text-sm focus:outline-none appearance-none m-0"
+                          className="w-full text-center bg-transparent text-[var(--color-brand-offwhite)] font-sans text-base md:text-sm focus:outline-none appearance-none m-0"
                           style={{ WebkitAppearance: 'none', MozAppearance: 'textfield' }}
                         />
                         <button 
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="w-8 h-full flex items-center justify-center text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 transition-colors"
+                          className="w-10 md:w-8 h-full flex items-center justify-center text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 transition-colors cursor-pointer"
                         >
-                          <Plus size={14} />
+                          <Plus size={16} />
                         </button>
                       </div>
                     </div>
                     
-                    <div className="col-span-2 text-right font-serif font-bold text-[20px] text-[var(--color-brand-gold)]">
+                    <div className="w-full md:w-auto md:col-span-2 flex justify-between md:justify-end md:text-right font-serif font-bold text-[22px] md:text-[20px] text-[var(--color-brand-gold)] pt-2 md:pt-0 self-center">
+                      <span className="md:hidden text-xs uppercase text-[var(--color-brand-graylight)] font-sans tracking-widest self-center">{t.subtotal}</span>
                       ${(item.price * item.quantity).toFixed(2)}
                     </div>
                   </div>
@@ -171,10 +177,10 @@ export function Cart() {
               </div>
 
               {/* Clear Cart */}
-              <div className="flex justify-end pt-4 border-t border-[var(--color-brand-gold)]/20">
+              <div className="flex justify-end pt-4 md:border-t border-[var(--color-brand-gold)]/20">
                 <button 
                   onClick={clearCart}
-                  className="text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] font-semibold uppercase tracking-widest text-xs border-b border-[var(--color-brand-graylight)] hover:border-[var(--color-brand-gold)] transition-colors pb-1"
+                  className="text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] font-semibold uppercase tracking-widest text-xs border border-[var(--color-brand-graylight)]/30 md:border-none md:border-b hover:border-[var(--color-brand-gold)] transition-colors py-3 px-6 md:py-0 md:px-0 md:pb-1 w-full md:w-auto text-center cursor-pointer"
                 >
                   {t.clearCart}
                 </button>
@@ -184,7 +190,7 @@ export function Cart() {
 
             {/* Right Column: Order Summary */}
             <div className="w-full lg:w-[350px] shrink-0">
-              <div className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)]/30 p-8 rounded-none flex flex-col gap-6 sticky top-24">
+              <div className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)]/30 p-5 md:p-8 rounded-none flex flex-col gap-6 lg:sticky top-24">
                 <h2 className="font-serif font-bold text-[24px] text-[var(--color-brand-offwhite)] border-b border-[var(--color-brand-gold)]/20 pb-4">
                   {t.orderSummary}
                 </h2>
@@ -212,17 +218,17 @@ export function Cart() {
                   </div>
                   
                   {/* Coupon Area Inside Order Summary */}
-                  <form onSubmit={handleApplyCoupon} className="flex flex-col gap-2 pb-4 border-b border-[var(--color-brand-gold)]/20">
+                  <form onSubmit={handleApplyCoupon} className="flex flex-col gap-3 pb-4 border-b border-[var(--color-brand-gold)]/20">
                     <input 
                       type="text" 
                       placeholder={t.couponPlaceholder}
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
-                      className="bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 px-4 py-2 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] rounded-none w-full text-sm"
+                      className="bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)]/30 px-4 py-3 text-[var(--color-brand-offwhite)] focus:outline-none focus:border-[var(--color-brand-gold)] rounded-none w-full text-base md:text-sm"
                     />
                     <button 
                       type="submit"
-                      className="bg-[var(--color-brand-navymid)] text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)] hover:text-[var(--color-brand-navy)] px-4 py-2 font-semibold uppercase tracking-widest text-[11px] transition-colors rounded-none border border-[var(--color-brand-gold)]/50 w-full"
+                      className="bg-[var(--color-brand-navymid)] text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)] hover:text-[var(--color-brand-navy)] px-4 py-3 font-semibold uppercase tracking-widest text-[12px] md:text-[11px] transition-colors rounded-none border border-[var(--color-brand-gold)]/50 w-full cursor-pointer"
                     >
                       {t.applyCoupon}
                     </button>
