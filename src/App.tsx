@@ -22,17 +22,11 @@ import { CartProvider } from "@/contexts/CartContext";
 export default function App() {
   return (
     <LangProvider>
-<<<<<<< HEAD
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-=======
       <CartProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Layout />}>
->>>>>>> a2bfda22e28fe13427325c9f6877efd4c6494383
           <Route index element={<Home />} />
           <Route path="historia" element={<Historia />} />
           <Route path="productos" element={<Productos />} />

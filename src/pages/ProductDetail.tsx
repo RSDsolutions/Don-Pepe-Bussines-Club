@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-<<<<<<< HEAD
 import { createPortal } from "react-dom";
-import { useParams, Link } from "react-router-dom";
-=======
 import { useParams, Link, useNavigate } from "react-router-dom";
->>>>>>> a2bfda22e28fe13427325c9f6877efd4c6494383
 import { ArrowLeft, CheckCircle2, PackageCheck, Loader2, ChevronLeft, ChevronRight, Star, Heart, Share2, Camera, Send, ShoppingCart, Tag as TagIcon, ShieldCheck, MapPin } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
 import { useLang } from "@/contexts/LangContext";
