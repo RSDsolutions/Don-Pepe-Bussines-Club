@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, CheckCircle2, PackageCheck, Loader2, ChevronLeft, ChevronRight, Star, Heart, Share2, Camera, Send, ShoppingCart, Tag as TagIcon, ShieldCheck, MapPin } from "lucide-react";
 import { FadeIn } from "@/components/FadeIn";
@@ -111,6 +112,34 @@ export function ProductDetail() {
   const [isExpanded, setIsExpanded] = useState(false);
   
   const carouselRef = useRef<HTMLDivElement>(null);
+  const relatedSectionRef = useRef<HTMLDivElement>(null);
+  const carouselItemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [isBottomBarVisible, setIsBottomBarVisible] = useState(true);
+  const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
+
+  // Observer for active carousel item (Mobile zoom effect)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = carouselItemsRef.current.findIndex(el => el === entry.target);
+            if (index !== -1) setActiveCarouselIndex(index);
+          }
+        });
+      },
+      {
+        root: carouselRef.current,
+        threshold: 0.6
+      }
+    );
+
+    carouselItemsRef.current.forEach(item => {
+      if (item) observer.observe(item);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
@@ -120,9 +149,32 @@ export function ProductDetail() {
     }
   };
 
-  // Scroll to top on mount
+  // Scroll to top on mount or when product changes
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, [product.name]);
+
+  // Hide bottom bar when reaching related products or scrolling past them
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // If the related section is visible, hide the bar
+          setIsBottomBarVisible(false);
+        } else {
+          // If it's not visible, only show the bar if the section is BELOW the viewport
+          // (meaning the user hasn't reached it yet). If it's above (top < 0), keep it hidden.
+          setIsBottomBarVisible(entry.boundingClientRect.top > 0);
+        }
+      },
+      { threshold: 0 }
+    );
+
+    if (relatedSectionRef.current) {
+      observer.observe(relatedSectionRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const totalEstimate = pacas * product.pricePerPaca;
@@ -162,7 +214,7 @@ export function ProductDetail() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[var(--color-brand-black)] pt-24 pb-16">
+    <div className="w-full min-h-screen bg-[var(--color-brand-black)] pt-12 pb-32 md:pb-24 relative">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         
         {/* Top Header: Breadcrumbs & Actions */}
@@ -313,7 +365,8 @@ export function ProductDetail() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              {/* Desktop Buttons */}
+              <div className="hidden lg:flex gap-4 mt-6">
                 <button 
                   className="flex-1 border border-[var(--color-brand-gold)]/50 text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 px-8 py-4 rounded-full text-[13px] sm:text-sm font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 text-center"
                 >
@@ -351,7 +404,7 @@ export function ProductDetail() {
       </div>
 
       {/* Related Products Carousel */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mt-12 md:mt-16 pt-8 md:pt-12 border-t border-[var(--color-brand-gold)]/10 relative">
+      <div ref={relatedSectionRef} className="max-w-[1440px] mx-auto px-6 md:px-12 mt-12 md:mt-16 pt-8 md:pt-12 border-t border-[var(--color-brand-gold)]/10 relative">
         <div className="flex flex-row justify-between items-center mb-6 md:mb-10 gap-4">
           <h2 className="font-serif font-bold text-[22px] md:text-[36px] text-[var(--color-brand-offwhite)] text-left flex-1">
             También podría interesarte
@@ -377,7 +430,7 @@ export function ProductDetail() {
         {/* Make sure we hide scrollbar natively in index.css or via tailwind if plugin exists. Fallback via inline style for now */}
         <div 
           ref={carouselRef}
-          className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory"
+          className="flex overflow-x-auto gap-0 sm:gap-6 pb-8 snap-x snap-mandatory -mx-6 md:-mx-12 sm:px-6 md:px-12"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {/* Custom style for webkit scrollbar hiding inline since we don't know if tailwind-scrollbar is installed */}
@@ -388,28 +441,36 @@ export function ProductDetail() {
           `}</style>
           
           {relatedProducts.map((prod, i) => (
-            <Link 
-              key={i} 
-              to={`/producto/${getSlug(prod.name)}`}
-              className="snap-start shrink-0 w-[280px] md:w-[360px] block h-full"
+            <div 
+              key={i}
+              ref={el => { carouselItemsRef.current[i] = el; }}
+              className="snap-center shrink-0 w-[100vw] sm:w-[280px] md:w-[360px] flex flex-col h-auto px-6 sm:px-0"
             >
-              <article
-                className="group h-full overflow-hidden border transition-all duration-300 bg-[var(--color-brand-navymid)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)]"
+              <Link 
+                to={`/producto/${getSlug(prod.name)}`}
+                className="flex-1 flex flex-col h-full"
               >
-                <div className="h-[250px] overflow-hidden relative">
+                <article
+                  className={cn(
+                    "group flex-1 flex flex-col overflow-hidden border transition-all duration-500 bg-[var(--color-brand-navymid)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)]",
+                    activeCarouselIndex === i ? "scale-100 opacity-100" : "scale-[0.9] opacity-50 sm:scale-100 sm:opacity-100"
+                  )}
+                >
+                  <div className="h-[250px] shrink-0 overflow-hidden relative">
                   <img src={prod.img} alt={prod.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[rgba(58,58,58,0.65)] via-transparent to-transparent" />
                 </div>
-                <div className="p-8">
-                  <span className="inline-flex mb-4 px-3 py-1 rounded-sm border border-[var(--color-brand-gold)]/40 text-[10px] font-sans font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-gold)]">
+                <div className="p-8 flex flex-col flex-1">
+                  <span className="inline-flex mb-4 px-3 py-1 rounded-sm border border-[var(--color-brand-gold)]/40 text-[10px] font-sans font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-gold)] w-fit">
                     {prod.type === "import" ? "Don Pepe Import" : "Don Pepe Sea Food"}
                   </span>
                   <h3 className="font-serif font-bold text-[28px] leading-none text-[var(--color-brand-offwhite)] mb-4 line-clamp-2">{prod.name}</h3>
-                  <p className="font-sans text-[15px] leading-relaxed text-[var(--color-brand-graylight)] line-clamp-3">{prod.desc}</p>
+                  <p className="font-sans text-[15px] leading-relaxed text-[var(--color-brand-graylight)] line-clamp-3 flex-1">{prod.desc}</p>
                 </div>
               </article>
             </Link>
-          ))}
+          </div>
+        ))}
         </div>
       </div>
 
@@ -485,6 +546,31 @@ export function ProductDetail() {
             )}
           </div>
         </div>
+      )}
+
+      {/* Fixed Bottom Action Bar (Mobile Only) */}
+      {createPortal(
+        <div 
+          className={cn(
+            "fixed bottom-0 left-0 right-0 z-50 bg-[var(--color-brand-navy)]/95 backdrop-blur-md border-t border-[var(--color-brand-gold)]/20 px-6 py-4 shadow-[0_-8px_30px_rgba(0,0,0,0.4)] lg:hidden transition-transform duration-500 ease-in-out",
+            isBottomBarVisible ? "translate-y-0" : "translate-y-full"
+          )}
+        >
+          <div className="flex gap-4 justify-between items-center">
+            <button 
+              className="flex-1 border border-[var(--color-brand-gold)]/50 text-[var(--color-brand-gold)] hover:bg-[var(--color-brand-gold)]/10 px-4 py-3 rounded-full text-[12px] sm:text-[13px] font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 text-center"
+            >
+              <ShoppingCart className="h-4 w-4 shrink-0" /> Añadir
+            </button>
+            <button 
+              onClick={handleCheckoutClick}
+              className="flex-1 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-4 py-3 rounded-full text-[12px] sm:text-[13px] font-semibold uppercase tracking-widest hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+            >
+              Comprar
+            </button>
+          </div>
+        </div>,
+        document.body
       )}
     </div>
   );

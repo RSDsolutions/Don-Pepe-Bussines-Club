@@ -190,16 +190,27 @@ function ProductCard({ name, desc, tag, img, delay, dark = false }: {
               : "bg-[var(--color-brand-black)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)] hover:shadow-[0_16px_40px_rgba(239,184,16,0.08)]",
           ].join(" ")}
         >
-          <div className="h-[250px] overflow-hidden relative">
+          <div className="h-[200px] sm:h-[250px] overflow-hidden relative">
             <img src={img} alt={name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-[rgba(58,58,58,0.65)] via-transparent to-transparent" />
           </div>
-          <div className="p-8">
+          <div className="p-6 sm:p-8">
             <span className="inline-flex mb-4 px-3 py-1 rounded-sm border border-[var(--color-brand-gold)]/40 text-[10px] font-sans font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-gold)]">
               {tag}
             </span>
-            <h3 className="font-serif font-bold text-[30px] leading-none text-[var(--color-brand-offwhite)] mb-4">{name}</h3>
-            <p className="font-sans text-[15px] leading-relaxed text-[var(--color-brand-graylight)] text-justify hyphens-auto line-clamp-3">{desc}</p>
+            <h3 className="font-serif font-bold text-[24px] sm:text-[30px] leading-none text-[var(--color-brand-offwhite)] mb-4">{name}</h3>
+            <div className="flex flex-row items-end justify-between gap-2 mt-2">
+              <div className="flex flex-col">
+                <span className="text-[10px] text-[var(--color-brand-graylight)] uppercase tracking-wider font-semibold mb-1">Por paca (50 uds)</span>
+                <span className="font-serif text-[24px] sm:text-[28px] text-[var(--color-brand-gold)] leading-none font-bold">$120.00</span>
+              </div>
+              <div 
+                className="flex items-center justify-center gap-1.5 bg-[var(--color-brand-gold)]/10 border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] group-hover:bg-[var(--color-brand-gold)] group-hover:text-[var(--color-brand-navy)] px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+                Añadir
+              </div>
+            </div>
           </div>
         </article>
       </Link>

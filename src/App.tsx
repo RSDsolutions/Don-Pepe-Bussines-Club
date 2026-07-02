@@ -5,6 +5,7 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/Layout";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { Home } from "@/pages/Home";
 import { Historia } from "@/pages/Historia";
 import { Productos } from "@/pages/Productos";
@@ -19,6 +20,7 @@ export default function App() {
   return (
     <LangProvider>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
