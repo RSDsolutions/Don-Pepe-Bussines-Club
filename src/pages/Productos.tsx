@@ -199,7 +199,7 @@ function ProductCard({ name, desc, tag, img, delay, dark = false }: {
               {tag}
             </span>
             <h3 className="font-serif font-bold text-[30px] leading-none text-[var(--color-brand-offwhite)] mb-4">{name}</h3>
-            <p className="font-sans text-[15px] leading-relaxed text-[var(--color-brand-graylight)]">{desc}</p>
+            <p className="font-sans text-[15px] leading-relaxed text-[var(--color-brand-graylight)] text-justify hyphens-auto line-clamp-3">{desc}</p>
           </div>
         </article>
       </Link>
