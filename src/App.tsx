@@ -14,14 +14,17 @@ import { Atm } from "@/pages/Atm";
 import { Contacto } from "@/pages/Contacto";
 import { ProductDetail } from "@/pages/ProductDetail";
 import { Checkout } from "@/pages/Checkout";
+import { Cart } from "@/pages/Cart";
 import { LangProvider } from "@/contexts/LangContext";
+import { CartProvider } from "@/contexts/CartContext";
 
 export default function App() {
   return (
     <LangProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
+      <CartProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="historia" element={<Historia />} />
           <Route path="productos" element={<Productos />} />
@@ -30,10 +33,12 @@ export default function App() {
           <Route path="atm" element={<Atm />} />
           <Route path="contacto" element={<Contacto />} />
           <Route path="producto/:id" element={<ProductDetail />} />
+          <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
         </Route>
       </Routes>
     </BrowserRouter>
+    </CartProvider>
     </LangProvider>
   );
 }
