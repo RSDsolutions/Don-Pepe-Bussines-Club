@@ -177,28 +177,32 @@ export function Productos() {
 function ProductCard({ name, desc, tag, img, delay, dark = false }: {
   name: string; desc: string; tag: string; img: string; delay: number; dark?: boolean;
 }) {
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
   return (
     <FadeIn delay={delay} direction="up">
-      <article
-        className={[
-          "group h-full overflow-hidden border transition-all duration-300",
-          dark
-            ? "bg-[var(--color-brand-navymid)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)]"
-            : "bg-[var(--color-brand-black)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)] hover:shadow-[0_16px_40px_rgba(239,184,16,0.08)]",
-        ].join(" ")}
-      >
-        <div className="h-[250px] overflow-hidden relative">
-          <img src={img} alt={name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[rgba(58,58,58,0.65)] via-transparent to-transparent" />
-        </div>
-        <div className="p-8">
-          <span className="inline-flex mb-4 px-3 py-1 rounded-sm border border-[var(--color-brand-gold)]/40 text-[10px] font-sans font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-gold)]">
-            {tag}
-          </span>
-          <h3 className="font-serif font-bold text-[30px] leading-none text-[var(--color-brand-offwhite)] mb-4">{name}</h3>
-          <p className="font-sans text-[15px] leading-relaxed text-[var(--color-brand-graylight)]">{desc}</p>
-        </div>
-      </article>
+      <Link to={`/producto/${slug}`} className="block h-full">
+        <article
+          className={[
+            "group h-full overflow-hidden border transition-all duration-300",
+            dark
+              ? "bg-[var(--color-brand-navymid)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)]"
+              : "bg-[var(--color-brand-black)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)] hover:shadow-[0_16px_40px_rgba(239,184,16,0.08)]",
+          ].join(" ")}
+        >
+          <div className="h-[250px] overflow-hidden relative">
+            <img src={img} alt={name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(58,58,58,0.65)] via-transparent to-transparent" />
+          </div>
+          <div className="p-8">
+            <span className="inline-flex mb-4 px-3 py-1 rounded-sm border border-[var(--color-brand-gold)]/40 text-[10px] font-sans font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-gold)]">
+              {tag}
+            </span>
+            <h3 className="font-serif font-bold text-[30px] leading-none text-[var(--color-brand-offwhite)] mb-4">{name}</h3>
+            <p className="font-sans text-[15px] leading-relaxed text-[var(--color-brand-graylight)]">{desc}</p>
+          </div>
+        </article>
+      </Link>
     </FadeIn>
   );
 }

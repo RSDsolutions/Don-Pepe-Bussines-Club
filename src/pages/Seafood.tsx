@@ -51,11 +51,10 @@ export function Seafood() {
               { ...t.products[3], img: "https://images.pexels.com/photos/3903587/pexels-photo-3903587.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" },
             ].map((prod, i) => (
               <FadeIn key={i} delay={staggerDelay(i)} direction="up">
-                <div
-                  className="group flex flex-col h-full bg-[var(--color-brand-navy)] border border-[var(--color-brand-teal)]/30 transition-all duration-300 hover:border-[var(--color-brand-teal)] hover:shadow-[0_0_0_1px_rgba(239,184,16,0.5),0_16px_40px_rgba(239,184,16,0.08)]"
-                  style={{ minHeight: '420px' }}
+                <div 
+                  className="group flex flex-col h-full bg-[var(--color-brand-navy)] border border-[var(--color-brand-teal)]/30 transition-all duration-300 hover:border-[var(--color-brand-teal)] hover:shadow-[0_0_0_1px_rgba(45,212,191,0.6),0_16px_40px_rgba(45,212,191,0.08)] min-h-[380px] md:min-h-[420px]"
                 >
-                  <div className="h-[240px] relative overflow-hidden border-b border-[var(--color-brand-teal)]/30">
+                  <div className="h-[200px] md:h-[240px] relative overflow-hidden border-b border-[var(--color-brand-teal)]/30">
                     <img src={prod.img} alt={prod.name} className="w-full h-full object-cover" loading="lazy" />
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -81,7 +80,7 @@ export function Seafood() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-[var(--color-brand-black)] border-t border-[var(--color-brand-teal)]/10">
+      <section className="py-12 md:py-24 bg-[var(--color-brand-black)] border-t border-[var(--color-brand-teal)]/10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <FadeIn className="text-center mb-16">
             <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-teal)] uppercase block mb-4">
@@ -113,7 +112,7 @@ export function Seafood() {
       </section>
 
       {/* Route Display */}
-      <section className="py-24 bg-[var(--color-brand-navy)] border-y border-[var(--color-brand-teal)]/20 text-center">
+      <section className="py-12 md:py-24 bg-[var(--color-brand-navy)] border-y border-[var(--color-brand-teal)]/20 text-center">
         <div className="max-w-[800px] mx-auto px-6">
           <FadeIn>
             <h2 className="font-serif font-bold text-[36px] md:text-[56px] text-[var(--color-brand-offwhite)] mb-6">
@@ -134,7 +133,7 @@ export function Seafood() {
       {/* Contact Card */}
       <section className="py-24 md:py-32">
         <div className="max-w-[600px] mx-auto px-6 text-center">
-          <FadeIn className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-teal)] p-12 relative overflow-hidden">
+          <FadeIn className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-teal)] p-6 md:p-12 relative overflow-hidden">
             <span className="font-sans font-semibold text-[10px] tracking-[0.2em] text-[var(--color-brand-navy)] uppercase bg-[var(--color-brand-teal)] px-4 py-2 absolute top-0 left-1/2 -translate-x-1/2 rounded-b-md">{T.common.directSupport}</span>
             <h3 className="font-serif text-[32px] text-[var(--color-brand-offwhite)] mb-4 mt-6">{t.cardHeading}</h3>
             <p className="font-sans text-[var(--color-brand-graylight)] mb-10">{t.cardBody}</p>
@@ -156,7 +155,7 @@ export function Seafood() {
               href="https://wa.me/14073743951"
               target="_blank"
               rel="noreferrer"
-              className="inline-block px-10 py-4 w-full rounded-full bg-[var(--color-brand-teal)] text-[var(--color-brand-navy)] font-sans font-semibold uppercase tracking-widest hover:scale-105 transition-all duration-300"
+              className="inline-block px-6 md:px-10 py-4 w-full rounded-full bg-[var(--color-brand-teal)] text-[var(--color-brand-navy)] font-sans font-semibold uppercase tracking-widest hover:scale-105 transition-all duration-300"
             >
               {T.common.whatsappBtn}
             </a>

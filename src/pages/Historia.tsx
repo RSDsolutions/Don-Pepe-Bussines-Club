@@ -210,7 +210,7 @@ export function Historia() {
                 />
                 <span
                   className="font-serif italic text-[var(--color-brand-offwhite)] group-hover/val:text-[var(--color-brand-gold)] transition-colors duration-[400ms]"
-                  style={{ fontSize: 'clamp(48px, 8vw, 96px)', lineHeight: 1 }}
+                  style={{ fontSize: 'clamp(32px, 8vw, 96px)', lineHeight: 1 }}
                 >
                   {val}
                 </span>
@@ -236,7 +236,7 @@ export function Historia() {
       <section className="py-24 border-t border-[var(--color-brand-gold)]/20 px-6">
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-0">
           <FadeIn direction="left">
-            <div className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)] p-12 lg:p-24 flex flex-col justify-center min-h-[400px]">
+            <div className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)] p-6 md:p-12 lg:p-24 flex flex-col justify-center min-h-[400px]">
               <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase mb-4 block">{t.dualitySoulLabel}</span>
               <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-offwhite)] mb-4">
                 {t.dualitySoulHeading.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br />}</span>)}
@@ -245,7 +245,7 @@ export function Historia() {
             </div>
           </FadeIn>
           <FadeIn direction="right">
-            <div className="bg-[var(--color-brand-gold)] p-12 lg:p-24 flex flex-col justify-center min-h-[400px]">
+            <div className="bg-[var(--color-brand-gold)] p-6 md:p-12 lg:p-24 flex flex-col justify-center min-h-[400px]">
               <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-navy)] uppercase mb-4 block">{t.dualityVisionLabel}</span>
               <h3 className="font-serif font-bold text-[32px] text-[var(--color-brand-navy)] mb-4">
                 {t.dualityVisionHeading.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br />}</span>)}

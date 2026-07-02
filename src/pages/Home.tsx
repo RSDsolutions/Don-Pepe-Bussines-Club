@@ -295,7 +295,7 @@ export function Home() {
               </Link>
             </FadeIn>
           </div>
-          <div className="md:w-[45%] w-full h-[500px]">
+          <div className="md:w-[45%] w-full h-[300px] md:h-[500px]">
             <FadeIn direction="right" className="w-full h-full relative overflow-hidden">
               <img
                 src="https://images.pexels.com/photos/17039185/pexels-photo-17039185.jpeg?auto=compress&cs=tinysrgb&w=900&h=900&dpr=1"
@@ -368,7 +368,7 @@ export function Home() {
             </span>
           </FadeIn>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 text-center">
             {t.valores.map((val, i) => (
               <FadeIn key={val} delay={staggerDelay(i)} direction="up">
                 <span className="block font-serif italic text-[36px] md:text-[48px] text-[var(--color-brand-offwhite)] mb-2 hover:text-[var(--color-brand-gold)] transition-colors duration-[400ms] cursor-default group/val">

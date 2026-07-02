@@ -129,7 +129,7 @@ export function Contacto() {
 
             {/* Right Column */}
             <div className="lg:w-[40%] w-full flex flex-col justify-end">
-              <FadeIn direction="up" delay={200} className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)] p-10 flex flex-col gap-10">
+              <FadeIn direction="up" delay={200} className="bg-[var(--color-brand-navy)] border border-[var(--color-brand-gold)] p-6 md:p-10 flex flex-col gap-10">
                 <div className="flex flex-col gap-2">
                   <span className="font-sans text-[12px] uppercase tracking-wider text-[var(--color-brand-gold)]">{t.phoneLabel}</span>
                   <a href="https://wa.me/14073743951" target="_blank" rel="noreferrer" className="font-serif text-[28px] text-[var(--color-brand-white)] hover:text-[var(--color-brand-gold)] transition-colors">
@@ -141,19 +141,19 @@ export function Contacto() {
                   <span className="font-sans text-[12px] uppercase tracking-wider text-[var(--color-brand-gold)]">{t.emailsLabel}</span>
                   <div className="flex flex-col">
                     <span className="font-sans text-[12px] text-[var(--color-brand-graylight)]">{t.importLabel}</span>
-                    <a href="mailto:donpepeimport@gmail.com" className="font-sans text-[16px] text-[var(--color-brand-offwhite)] hover:text-[var(--color-brand-gold)] transition-colors flex items-center justify-between">
+                    <a href="mailto:donpepeimport@gmail.com" className="font-sans text-[16px] text-[var(--color-brand-offwhite)] hover:text-[var(--color-brand-gold)] transition-colors flex items-center justify-between flex-wrap gap-2 break-all">
                       donpepeimport@gmail.com <Copy size={14} className="text-[var(--color-brand-goldmuted)] opacity-0 hover:opacity-100" />
                     </a>
                   </div>
                   <div className="flex flex-col">
                     <span className="font-sans text-[12px] text-[var(--color-brand-graylight)]">{t.seafoodLabel}</span>
-                    <a href="mailto:info@donpepeseafood.com" className="font-sans text-[16px] text-[var(--color-brand-offwhite)] hover:text-[var(--color-brand-gold)] transition-colors flex items-center justify-between">
+                    <a href="mailto:info@donpepeseafood.com" className="font-sans text-[16px] text-[var(--color-brand-offwhite)] hover:text-[var(--color-brand-gold)] transition-colors flex items-center justify-between flex-wrap gap-2 break-all">
                       info@donpepeseafood.com <Copy size={14} className="text-[var(--color-brand-goldmuted)] opacity-0 hover:opacity-100" />
                     </a>
                   </div>
                   <div className="flex flex-col">
                     <span className="font-sans text-[12px] text-[var(--color-brand-graylight)]">{t.corpLabel}</span>
-                    <a href="mailto:info@donpepebussinessgroup.com" className="font-sans text-[16px] text-[var(--color-brand-offwhite)] hover:text-[var(--color-brand-gold)] transition-colors flex items-center justify-between">
+                    <a href="mailto:info@donpepebussinessgroup.com" className="font-sans text-[16px] text-[var(--color-brand-offwhite)] hover:text-[var(--color-brand-gold)] transition-colors flex items-center justify-between flex-wrap gap-2 break-all">
                       info@donpepebussinessgroup.com <Copy size={14} className="text-[var(--color-brand-goldmuted)] opacity-0 hover:opacity-100" />
                     </a>
                   </div>

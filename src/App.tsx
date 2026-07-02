@@ -12,6 +12,7 @@ import { Import } from "@/pages/Import";
 import { Seafood } from "@/pages/Seafood";
 import { Atm } from "@/pages/Atm";
 import { Contacto } from "@/pages/Contacto";
+import { ProductDetail } from "@/pages/ProductDetail";
 import { LangProvider } from "@/contexts/LangContext";
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="seafood" element={<Seafood />} />
           <Route path="atm" element={<Atm />} />
           <Route path="contacto" element={<Contacto />} />
+          <Route path="producto/:id" element={<ProductDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

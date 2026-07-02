@@ -19,7 +19,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="flex flex-col gap-4">
               <h4 className="font-sans font-medium text-xs tracking-widest uppercase text-[var(--color-brand-gold)] mb-2">{T.footer.company}</h4>
               <Link to="/" className="font-sans text-sm text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors">{T.footer.home}</Link>
@@ -37,7 +37,7 @@ export function Footer() {
 
           <div className="flex flex-col gap-4">
             <h4 className="font-sans font-medium text-xs tracking-widest uppercase text-[var(--color-brand-gold)] mb-2">{T.footer.contact}</h4>
-            <a href="mailto:info@donpepebussinessgroup.com" className="font-sans text-sm text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors">info@donpepebussinessgroup.com</a>
+            <a href="mailto:info@donpepebussinessgroup.com" className="font-sans text-sm text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors break-all">info@donpepebussinessgroup.com</a>
             <a href="https://wa.me/14073743951" target="_blank" rel="noreferrer" className="font-sans text-sm text-[var(--color-brand-graylight)] hover:text-[var(--color-brand-gold)] transition-colors">+1 (407) 374-3951</a>
 
             <div className="flex items-center gap-4 mt-4">

@@ -66,7 +66,7 @@ export function Atm() {
       </section>
 
       {/* Philosophy */}
-      <section className="py-24 bg-[var(--color-brand-black)] border-t border-[var(--color-brand-gold)]/20">
+      <section className="py-12 md:py-24 bg-[var(--color-brand-black)] border-t border-[var(--color-brand-gold)]/20">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-16">
           <div className="md:w-1/2">
             <FadeIn>
@@ -88,7 +88,7 @@ export function Atm() {
             </FadeIn>
           </div>
           <div className="md:w-1/2 w-full">
-            <FadeIn direction="right" className="w-full h-[400px]">
+            <FadeIn direction="right" className="w-full h-[250px] md:h-[400px]">
               <AtmIllustration />
             </FadeIn>
           </div>
@@ -96,13 +96,13 @@ export function Atm() {
       </section>
 
       {/* Coverage */}
-      <section className="py-24 bg-[var(--color-brand-navy)] border-y border-[var(--color-brand-gold)]/20 text-center">
+      <section className="py-12 md:py-24 bg-[var(--color-brand-navy)] border-y border-[var(--color-brand-gold)]/20 text-center">
         <div className="max-w-[1000px] mx-auto px-6">
           <FadeIn>
             <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase block mb-6">
               {t.coverageEyebrow}
             </span>
-            <div className="text-[64px] mb-6">🇺🇸</div>
+            <div className="text-5xl md:text-[64px] mb-6">🇺🇸</div>
             <h2 className="font-serif font-bold text-[var(--color-brand-offwhite)] mb-6" style={{ fontSize: 'clamp(36px, 5vw, 56px)', lineHeight: 1.1 }}>
               {t.coverageHeading.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br />}</span>)}
             </h2>
@@ -124,7 +124,7 @@ export function Atm() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-[var(--color-brand-black)] border-t border-[var(--color-brand-gold)]/10">
+      <section className="py-12 md:py-24 bg-[var(--color-brand-black)] border-t border-[var(--color-brand-gold)]/10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <FadeIn className="text-center mb-16">
             <span className="font-sans text-[11px] font-semibold tracking-[0.25em] text-[var(--color-brand-gold)] uppercase block mb-4">
@@ -158,7 +158,7 @@ export function Atm() {
       {/* Contact Card */}
       <section className="py-24 md:py-32">
         <div className="max-w-[600px] mx-auto px-6 text-center">
-          <FadeIn className="bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)] p-12 relative overflow-hidden">
+          <FadeIn className="bg-[var(--color-brand-navymid)] border border-[var(--color-brand-gold)] p-6 md:p-12 relative overflow-hidden">
             <span className="font-sans font-semibold text-[10px] tracking-[0.2em] text-[var(--color-brand-navy)] uppercase bg-[var(--color-brand-gold)] px-4 py-2 absolute top-0 left-1/2 -translate-x-1/2 rounded-b-md">{T.common.directSupport}</span>
             <h3 className="font-serif text-[32px] text-[var(--color-brand-offwhite)] mb-4 mt-6">{t.cardHeading}</h3>
             <p className="font-sans text-[var(--color-brand-graylight)] mb-10">{t.cardBody}</p>
@@ -180,7 +180,7 @@ export function Atm() {
               href="https://wa.me/14073743951"
               target="_blank"
               rel="noreferrer"
-              className="inline-block px-10 py-4 w-full rounded-full bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] font-sans font-semibold uppercase tracking-widest hover:scale-105 transition-all duration-300"
+              className="inline-block px-6 md:px-10 py-4 w-full rounded-full bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] font-sans font-semibold uppercase tracking-widest hover:scale-105 transition-all duration-300"
             >
               {T.common.whatsappBtn}
             </a>
