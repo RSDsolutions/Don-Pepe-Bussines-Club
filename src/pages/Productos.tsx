@@ -195,29 +195,59 @@ function ProductCard({ name, desc, tag, img, delay, dark = false }: {
 
   return (
     <FadeIn delay={delay} direction="up">
-      <Link to={`/producto/${slug}`} className="block h-full">
-        <article
-          className={[
-            "group h-full overflow-hidden border transition-all duration-300",
-            dark
-              ? "bg-[var(--color-brand-navymid)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)]"
-              : "bg-[var(--color-brand-black)] border-[var(--color-brand-gold)]/25 hover:border-[var(--color-brand-gold)] hover:shadow-[0_16px_40px_rgba(239,184,16,0.08)]",
-          ].join(" ")}
+      <Link to={`/producto/${slug}`} className="block h-[420px] sm:h-[460px]">
+        <div
+          className="group relative w-full h-full overflow-hidden rounded-none border border-[var(--color-brand-gold)]/20 bg-[var(--color-brand-black)] shadow-lg transition-all duration-500 ease-in-out hover:shadow-[0_20px_40px_rgba(239,184,16,0.15)] hover:-translate-y-2"
         >
-          <div className="h-[200px] sm:h-[250px] overflow-hidden relative">
-            <img src={img} alt={name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(58,58,58,0.65)] via-transparent to-transparent" />
-          </div>
-          <div className="p-6 sm:p-8">
-            <span className="inline-flex mb-4 px-3 py-1 rounded-sm border border-[var(--color-brand-gold)]/40 text-[10px] font-sans font-semibold uppercase tracking-[0.16em] text-[var(--color-brand-gold)]">
-              {tag}
-            </span>
-            <h3 className="font-serif font-bold text-[24px] sm:text-[30px] leading-none text-[var(--color-brand-offwhite)] mb-4">{name}</h3>
-            <div className="flex flex-row items-end justify-between gap-2 mt-2">
-              <div className="flex flex-col">
-                <span className="text-[10px] text-[var(--color-brand-graylight)] uppercase tracking-wider font-semibold mb-1">Por paca (50 uds)</span>
-                <span className="font-serif text-[24px] sm:text-[28px] text-[var(--color-brand-gold)] leading-none font-bold">$120.00</span>
+          {/* Background Image with Zoom Effect on Hover */}
+          <img
+            src={img}
+            alt={name}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+            loading="lazy"
+          />
+
+          {/* Gradient Overlay for Text Readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent transition-opacity duration-500 group-hover:opacity-100"></div>
+
+          {/* Content Container */}
+          <div className="relative flex h-full flex-col justify-between p-6">
+            {/* Top Section: Tag */}
+            <div className="flex h-12 items-start">
+               <div className="flex px-4 py-1.5 items-center justify-center rounded-none border border-white/30 bg-black/30 backdrop-blur-md">
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-[0.16em] text-[var(--color-brand-gold)]">{tag}</span>
+               </div>
+            </div>
+            
+            {/* Middle Section: Details (slides up on hover) */}
+            <div className="space-y-3 transition-transform duration-500 ease-in-out group-hover:-translate-y-20">
+              <div>
+                <h3 className="text-2xl sm:text-[28px] leading-tight font-serif font-bold text-white drop-shadow-md line-clamp-2">{name}</h3>
+                <p className="text-sm text-white/80 mt-2 font-medium tracking-wide">DON PEPE</p>
               </div>
+              <div className="pt-2">
+                <h4 className="font-semibold text-white/90 text-xs tracking-wider mb-2 uppercase">Descripción</h4>
+                <p className="text-[13px] text-white/70 leading-relaxed line-clamp-3">
+                  {desc || "Producto premium de alta calidad importado desde Ecuador, seleccionado bajo los más estrictos estándares para ti."}
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Section: Price and Button (revealed on hover) */}
+            <div className="absolute -bottom-24 left-0 w-full p-6 opacity-0 transition-all duration-500 ease-in-out group-hover:bottom-0 group-hover:opacity-100">
+              <div className="flex items-end justify-between border-t border-white/20 pt-5">
+                <div className="flex flex-col">
+                  <span className="text-white/70 text-[10px] uppercase tracking-widest font-semibold mb-1">Por paca (50 uds)</span>
+                  <span className="text-3xl font-serif font-bold text-[var(--color-brand-gold)] drop-shadow-sm">$120.00</span>
+                </div>
+                <button 
+                  onClick={handleAdd} 
+                  className="flex items-center justify-center gap-2 bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] px-5 py-3 rounded-none text-[11px] font-bold uppercase tracking-widest hover:bg-[var(--color-brand-goldlight)] hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl cursor-pointer"
+                >
+                  Añadir <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+<<<<<<< HEAD
               <button 
                 onClick={handleAdd}
                 className="flex items-center justify-center gap-1.5 bg-[var(--color-brand-gold)]/10 border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] group-hover:bg-[var(--color-brand-gold)] group-hover:text-[var(--color-brand-navy)] px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest transition-all cursor-pointer relative z-10"
@@ -225,9 +255,11 @@ function ProductCard({ name, desc, tag, img, delay, dark = false }: {
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
                 Añadir
               </button>
+=======
+>>>>>>> 8ad20d24deca3d75d230e657ad522eab02fa7c9c
             </div>
           </div>
-        </article>
+        </div>
       </Link>
     </FadeIn>
   );
