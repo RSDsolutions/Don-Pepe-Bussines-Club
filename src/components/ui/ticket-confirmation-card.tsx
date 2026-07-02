@@ -211,10 +211,10 @@ export function AnimatedTicket({
 
           </div>
 
-          {/* Outside Buttons with Active Scale Effects */}
+          {/* Outside Buttons with Cursor, Zoom, and Active Scale Effects */}
           <button 
             onClick={() => window.print()}
-            className="flex items-center justify-center gap-2 text-[var(--color-brand-gold)] font-bold text-sm tracking-widest mt-8 hover:opacity-80 active:scale-95 transition-all"
+            className="flex items-center justify-center gap-2 text-[var(--color-brand-gold)] font-bold text-sm tracking-widest mt-8 hover:scale-105 hover:opacity-90 active:scale-95 transition-all duration-300 cursor-pointer"
           >
             <Download className="w-5 h-5" />
             {t.download}
@@ -222,7 +222,7 @@ export function AnimatedTicket({
           
           <button 
             onClick={onClose}
-            className="w-full bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] font-bold uppercase tracking-widest text-[13px] py-4 mt-6 rounded-none hover:brightness-110 active:scale-[0.98] transition-all border border-[var(--color-brand-gold)]"
+            className="w-full bg-[var(--color-brand-gold)] text-[var(--color-brand-navy)] font-bold uppercase tracking-widest text-[13px] py-4 mt-6 rounded-none hover:scale-[1.03] hover:brightness-110 active:scale-[0.98] transition-all duration-300 border border-[var(--color-brand-gold)] cursor-pointer"
           >
             {t.returnStore}
           </button>
@@ -230,17 +230,35 @@ export function AnimatedTicket({
         </div>
       </div>
 
+      {/* PRINT STYLES - Force hide everything else and absolute position the print section */}
+      <style>{`
+        @media print {
+          body * {
+            visibility: hidden;
+          }
+          #print-section, #print-section * {
+            visibility: visible;
+          }
+          #print-section {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+          }
+        }
+      `}</style>
+
       {/* PRINT LAYOUT - Hidden on screen, block on print */}
-      <div className="hidden print:block w-full max-w-[900px] mx-auto bg-white p-8 text-black font-sans">
+      <div id="print-section" className="hidden print:block w-full max-w-[900px] mx-auto bg-white p-8 text-black font-sans">
         
-        {/* Logo area */}
-        <div className="mb-6">
-          <div className="text-3xl font-serif font-bold tracking-widest text-black">
+        {/* Title area with Logo */}
+        <div className="flex items-center gap-4 mb-2">
+          <div className="text-2xl font-serif font-bold tracking-widest text-black bg-slate-100 px-3 py-1 rounded">
             DON PEPE
           </div>
+          <h1 className="text-3xl font-normal">{t.orderSummaryTitle}</h1>
         </div>
-
-        <h1 className="text-3xl font-normal mb-2">{t.orderSummaryTitle}</h1>
+        
         <div className="flex gap-6 text-sm mb-6">
           <p>{t.orderPlaced} {formattedDateLong}</p>
           <p>{t.orderNo} {ticketId}</p>
@@ -252,9 +270,9 @@ export function AnimatedTicket({
           {/* Col 1: Enviar a */}
           <div className="flex flex-col text-sm">
             <span className="font-bold mb-1">{t.sendTo}</span>
-            <span className="uppercase">{shippingAddress?.firstName} {shippingAddress?.lastName}</span>
-            <span className="uppercase">{shippingAddress?.address}</span>
-            <span className="uppercase">{shippingAddress?.city}, {shippingAddress?.state} {shippingAddress?.zipCode}</span>
+            <span className="uppercase">{shippingAddress?.firstName || ''} {shippingAddress?.lastName || ''}</span>
+            <span className="uppercase">{shippingAddress?.address || ''}</span>
+            <span className="uppercase">{shippingAddress?.city || ''}, {shippingAddress?.state || ''} {shippingAddress?.zipCode || ''}</span>
           </div>
 
           {/* Col 2: Método de pago */}
