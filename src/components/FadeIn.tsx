@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 
 interface FadeInProps {
   children: ReactNode;
+  key?: any;
   className?: string;
   delay?: number;
   direction?: "up" | "down" | "left" | "right" | "none" | "scale";

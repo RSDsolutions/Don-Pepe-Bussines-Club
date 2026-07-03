@@ -41,7 +41,7 @@ function useCountUp(target: number, duration = 1200) {
   return { count, ref };
 }
 
-function TimelineNode({ year, text, index, flip }: { year: string; text: string; index: number; flip: boolean }) {
+function TimelineNode({ year, text, index, flip }: { key?: any; year: string; text: string; index: number; flip: boolean }) {
   const [pulsed, setPulsed] = useState(false);
   const dotRef = useRef<HTMLDivElement>(null);
   const year1990 = useCountUp(1990);

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, CheckCircle2, PackageCheck, Loader2, ChevronLeft, ChevronRight, Star, Heart, Share2, Camera, Send, ShoppingCart, Tag as TagIcon, ShieldCheck, MapPin } from "lucide-react";

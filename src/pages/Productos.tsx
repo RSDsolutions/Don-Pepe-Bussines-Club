@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Fish, PackageCheck, ShieldCheck, Snowflake, CreditCard, Truck } from "lucide-react";
 import { FadeIn, staggerDelay } from "@/components/FadeIn";
@@ -176,6 +177,7 @@ export function Productos() {
 }
 
 function ProductCard({ name, desc, tag, img, delay, dark = false }: {
+  key?: any;
   name: string; desc: string; tag: string; img: string; delay: number; dark?: boolean;
 }) {
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
@@ -247,16 +249,6 @@ function ProductCard({ name, desc, tag, img, delay, dark = false }: {
                   Añadir <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
-<<<<<<< HEAD
-              <button 
-                onClick={handleAdd}
-                className="flex items-center justify-center gap-1.5 bg-[var(--color-brand-gold)]/10 border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] group-hover:bg-[var(--color-brand-gold)] group-hover:text-[var(--color-brand-navy)] px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest transition-all cursor-pointer relative z-10"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
-                Añadir
-              </button>
-=======
->>>>>>> 8ad20d24deca3d75d230e657ad522eab02fa7c9c
             </div>
           </div>
         </div>
