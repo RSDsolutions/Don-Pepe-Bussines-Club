@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { Instagram, Linkedin, Facebook, MessageCircle } from "lucide-react";
+import { Instagram, Linkedin, Facebook, MessageCircle, Lock } from "lucide-react";
 import { Logo } from "./icons";
 import { useLang } from "@/contexts/LangContext";
 
 export function Footer() {
-  const { T } = useLang();
+  const { T, lang } = useLang();
   return (
     <footer className="bg-[var(--color-brand-navy)] border-t border-[var(--color-brand-gold)] border-opacity-15 pb-8">
       <div className="divider-gold" />
@@ -64,6 +64,13 @@ export function Footer() {
           <p className="font-sans text-xs text-[var(--color-brand-graymuted)]">
             {T.footer.copyright}
           </p>
+          <Link
+            to="/admin"
+            className="mt-2 inline-flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-widest text-[var(--color-brand-graymuted)] hover:text-[var(--color-brand-gold)] transition-colors"
+          >
+            <Lock size={12} />
+            {lang === "es" ? "Acceso al panel" : "Staff login"}
+          </Link>
         </div>
       </div>
     </footer>

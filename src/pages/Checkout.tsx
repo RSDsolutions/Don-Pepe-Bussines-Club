@@ -16,6 +16,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useCart } from "@/contexts/CartContext";
 import { useLang } from "@/contexts/LangContext";
 import { AnimatedTicket } from "@/components/ui/ticket-confirmation-card";
+import { saveOrder } from "@/lib/store";
 
 interface ShippingAddress {
   firstName: string;
@@ -131,9 +132,25 @@ export function Checkout() {
   };
 
   const handleApprove = (data: any, actions: any) => {
-    return actions.order.capture().then(function (details: any) {
+    return actions.order.capture().then(async function (details: any) {
+      // Persist the sale to the database (best-effort, non-blocking for UX).
+      const orderNumber = await saveOrder({
+        customerName: `${shippingAddress.firstName} ${shippingAddress.lastName}`.trim() || "Cliente",
+        customerEmail: shippingAddress.email,
+        customerPhone: shippingAddress.phone,
+        address: shippingAddress.address,
+        city: shippingAddress.city,
+        state: shippingAddress.state,
+        postalCode: shippingAddress.zipCode,
+        country: "USA",
+        paymentMethod: paymentMethod === 'paypal' ? 'PayPal' : 'Tarjeta',
+        items: cartItems.map((i) => ({ id: i.id, name: i.name, price: i.price, quantity: i.quantity })),
+        subtotal: cartTotal,
+        total: cartTotal,
+      });
+
       setCompletedOrder({
-         ticketId: `REQ-${Math.floor(Math.random() * 1000000)}`,
+         ticketId: orderNumber || `REQ-${Math.floor(Math.random() * 1000000)}`,
          amount: cartTotal,
          date: new Date(),
          cardHolder: `${shippingAddress.firstName} ${shippingAddress.lastName}`.trim() || "Cliente",
@@ -142,8 +159,7 @@ export function Checkout() {
          items: cartItems,
          shippingAddress: shippingAddress
       });
-      // Simulate success flow
-      setCurrentStep(3); 
+      setCurrentStep(3);
       clearCart(); // Empty the cart on successful purchase
     });
   };

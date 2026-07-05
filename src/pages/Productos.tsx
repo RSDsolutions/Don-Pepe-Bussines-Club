@@ -5,6 +5,8 @@ import { FadeIn, staggerDelay } from "@/components/FadeIn";
 import { PageHero } from "@/components/PageHero";
 import { useLang } from "@/contexts/LangContext";
 import { useCart } from "@/contexts/CartContext";
+import { useStoreProducts } from "@/lib/store";
+import { slugify, money } from "@/lib/format";
 
 const standardIcons = [PackageCheck, Snowflake, ShieldCheck];
 const atmIcons = [CreditCard, Truck, ShieldCheck];
@@ -26,10 +28,29 @@ const seafoodImgs = [
 ];
 
 export function Productos() {
-  const { T } = useLang();
+  const { T, lang } = useLang();
   const t = T.productos;
   const importProds = T.import.products;
   const seafoodProds = T.seafood.products;
+
+  // Live catalog from the database, with graceful fallback to static copy.
+  const store = useStoreProducts(lang);
+
+  const importList = store.hasData
+    ? store.importProducts.map((p) => ({
+        name: p.name, desc: p.description, tag: p.tag, img: p.image, price: p.price, slug: p.slug,
+      }))
+    : importProds.map((prod, i) => ({
+        name: prod.name, desc: prod.desc, tag: "Don Pepe Import", img: exportImgs[i], price: 120, slug: slugify(prod.name),
+      }));
+
+  const seafoodList = store.hasData
+    ? store.seafoodProducts.map((p) => ({
+        name: p.name, desc: p.description, tag: p.tag, img: p.image, price: p.price, slug: p.slug,
+      }))
+    : seafoodProds.map((prod, i) => ({
+        name: prod.name, desc: prod.desc, tag: "Don Pepe Sea Food", img: seafoodImgs[i], price: 175, slug: slugify(prod.name),
+      }));
 
   return (
     <div className="w-full bg-[var(--color-brand-black)]">
@@ -74,8 +95,8 @@ export function Productos() {
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {importProds.map((prod, i) => (
-              <ProductCard key={i} name={prod.name} desc={prod.desc} tag="Don Pepe Import" img={exportImgs[i]} delay={staggerDelay(i)} />
+            {importList.map((prod, i) => (
+              <ProductCard key={prod.slug || i} name={prod.name} desc={prod.desc} tag={prod.tag} img={prod.img} price={prod.price} slug={prod.slug} delay={staggerDelay(i)} />
             ))}
           </div>
         </div>
@@ -93,8 +114,8 @@ export function Productos() {
             </h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {seafoodProds.map((prod, i) => (
-              <ProductCard key={i} name={prod.name} desc={prod.desc} tag="Don Pepe Sea Food" img={seafoodImgs[i]} delay={staggerDelay(i)} dark />
+            {seafoodList.map((prod, i) => (
+              <ProductCard key={prod.slug || i} name={prod.name} desc={prod.desc} tag={prod.tag} img={prod.img} price={prod.price} slug={prod.slug} delay={staggerDelay(i)} dark />
             ))}
           </div>
         </div>
@@ -176,11 +197,11 @@ export function Productos() {
   );
 }
 
-function ProductCard({ name, desc, tag, img, delay, dark = false }: {
+function ProductCard({ name, desc, tag, img, delay, price = 120, slug: slugProp, dark = false }: {
   key?: any;
-  name: string; desc: string; tag: string; img: string; delay: number; dark?: boolean;
+  name: string; desc: string; tag: string; img: string; delay: number; price?: number; slug?: string; dark?: boolean;
 }) {
-  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  const slug = slugProp || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
   const { addToCart } = useCart();
 
   const handleAdd = (e: React.MouseEvent) => {
@@ -188,7 +209,7 @@ function ProductCard({ name, desc, tag, img, delay, dark = false }: {
     addToCart({
       id: slug,
       name,
-      price: 120.00,
+      price,
       image: img,
       quantity: 1,
       tag
@@ -240,7 +261,7 @@ function ProductCard({ name, desc, tag, img, delay, dark = false }: {
               <div className="flex items-end justify-between border-t border-white/20 pt-5">
                 <div className="flex flex-col">
                   <span className="text-white/70 text-[10px] uppercase tracking-widest font-semibold mb-1">Por paca (50 uds)</span>
-                  <span className="text-3xl font-serif font-bold text-[var(--color-brand-gold)] drop-shadow-sm">$120.00</span>
+                  <span className="text-3xl font-serif font-bold text-[var(--color-brand-gold)] drop-shadow-sm">{money(price)}</span>
                 </div>
                 <button 
                   onClick={handleAdd} 

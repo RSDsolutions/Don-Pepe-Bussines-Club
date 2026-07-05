@@ -7,6 +7,7 @@ import { useLang } from "@/contexts/LangContext";
 import { useCart } from "@/contexts/CartContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { fetchProductBySlug, type StoreProduct } from "@/lib/store";
 
 const exportImgs = [
   "https://images.pexels.com/photos/30893343/pexels-photo-30893343.jpeg?auto=compress&cs=tinysrgb&w=700&h=520&dpr=1",
@@ -44,9 +45,22 @@ const StarRating = ({ rating, className }: { rating: number; className?: string 
 export function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { T } = useLang();
+  const { T, lang } = useLang();
   const { addToCart } = useCart();
-  
+
+  // Live product from the database (overrides static copy when available).
+  const [dbProduct, setDbProduct] = useState<StoreProduct | null>(null);
+  useEffect(() => {
+    if (!id) return;
+    let cancelled = false;
+    fetchProductBySlug(id, lang).then((p) => {
+      if (!cancelled) setDbProduct(p);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [id, lang]);
+
   // Find product in translations
   let foundProduct = null;
   let foundImg = "";
@@ -80,11 +94,11 @@ export function ProductDetail() {
 
   const product = {
     id,
-    name: foundProduct ? foundProduct.name : (id ? id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : "Producto Premium"),
-    tag: foundTag || "Don Pepe Business Club",
-    desc: foundProduct ? foundProduct.desc : "Este producto premium cuenta con los más altos estándares de calidad para exportación.",
-    images: imagesArray,
-    pricePerPaca: 120.00,
+    name: dbProduct?.name ?? (foundProduct ? foundProduct.name : (id ? id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : "Producto Premium")),
+    tag: dbProduct?.tag ?? (foundTag || "Don Pepe Business Club"),
+    desc: dbProduct?.description || (foundProduct ? foundProduct.desc : "Este producto premium cuenta con los más altos estándares de calidad para exportación."),
+    images: dbProduct?.image ? [dbProduct.image, ...imagesArray.filter((img) => img !== dbProduct.image)] : imagesArray,
+    pricePerPaca: dbProduct?.price ?? 120.00,
     unitsPerPaca: 50,
     minOrder: 1,
     tags: [
