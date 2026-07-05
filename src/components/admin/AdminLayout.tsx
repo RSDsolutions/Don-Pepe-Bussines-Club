@@ -6,6 +6,7 @@ import {
   ShoppingBag,
   Boxes,
   BookOpenText,
+  FileDown,
   LogOut,
   Menu,
   X,
@@ -20,6 +21,7 @@ const nav = [
   { to: "/admin/ordenes", label: "Órdenes", icon: ShoppingBag, end: false },
   { to: "/admin/inventario", label: "Inventario", icon: Boxes, end: false },
   { to: "/admin/contabilidad", label: "Contabilidad", icon: BookOpenText, end: false },
+  { to: "/admin/reportes", label: "Reportes", icon: FileDown, end: false },
 ];
 
 /** Blocks access until an authenticated session exists. */

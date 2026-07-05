@@ -113,44 +113,35 @@ export interface SaveOrderInput {
  */
 export async function saveOrder(input: SaveOrderInput): Promise<string | null> {
   try {
-    // Resolve product ids from slugs so items link back to the catalog.
-    const slugs = input.items.map((i) => i.id);
-    const { data: prodRows } = await supabase.from("products").select("id,slug").in("slug", slugs);
-    const idBySlug = new Map((prodRows || []).map((p) => [p.slug, p.id]));
-
-    const { data: order, error } = await supabase
-      .from("orders")
-      .insert({
-        customer_name: input.customerName || "Cliente",
-        customer_email: input.customerEmail || "",
-        customer_phone: input.customerPhone || "",
+    // Uses the SECURITY DEFINER `create_order` RPC so the public checkout can
+    // persist the sale (and get the order number back) without read access to
+    // the orders table. Item product_ids are resolved server-side from slug.
+    const { data, error } = await supabase.rpc("create_order", {
+      p_customer: {
+        name: input.customerName || "Cliente",
+        email: input.customerEmail || "",
+        phone: input.customerPhone || "",
         address: input.address || "",
         city: input.city || "",
         state: input.state || "",
         postal_code: input.postalCode || "",
         country: input.country || "",
         payment_method: input.paymentMethod || "",
-        status: "paid",
-        subtotal: input.subtotal,
-        shipping: input.shipping || 0,
-        total: input.total,
-      })
-      .select("id, order_number")
-      .single();
+      },
+      p_items: input.items.map((i) => ({
+        slug: i.id, // storefront cart id is the product slug
+        name: i.name,
+        unit_price: i.price,
+        quantity: i.quantity,
+        line_total: Number((i.price * i.quantity).toFixed(2)),
+      })),
+      p_subtotal: input.subtotal,
+      p_shipping: input.shipping || 0,
+      p_total: input.total,
+    });
 
-    if (error || !order) return null;
-
-    const itemRows = input.items.map((i) => ({
-      order_id: order.id,
-      product_id: idBySlug.get(i.id) ?? null,
-      product_name: i.name,
-      unit_price: i.price,
-      quantity: i.quantity,
-      line_total: Number((i.price * i.quantity).toFixed(2)),
-    }));
-    await supabase.from("order_items").insert(itemRows);
-
-    return (order as { order_number: string }).order_number;
+    if (error) return null;
+    return (data as unknown as string) || null;
   } catch {
     return null;
   }
