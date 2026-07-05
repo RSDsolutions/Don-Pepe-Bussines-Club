@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type MouseEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronDown, ShoppingCart } from "lucide-react";
+import { Menu, X, ChevronDown, ShoppingCart, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./icons";
 import { useLang } from "@/contexts/LangContext";
@@ -197,6 +197,16 @@ export function Navbar() {
               )}
             </Link>
 
+            {/* Staff / admin access */}
+            <Link
+              to="/admin"
+              title={lang === "es" ? "Ingreso al panel" : "Staff login"}
+              aria-label={lang === "es" ? "Ingreso al panel" : "Staff login"}
+              className="text-[var(--color-brand-graymuted)] hover:text-[var(--color-brand-gold)] transition-colors"
+            >
+              <LogIn size={20} />
+            </Link>
+
             <button
               onClick={scrollToContact}
               className="gold-pulse px-8 py-2 rounded-full border border-[var(--color-brand-gold)] text-[var(--color-brand-gold)] text-xs font-semibold uppercase tracking-widest hover:bg-[var(--color-brand-gold)] hover:text-[var(--color-brand-navy)] transition-all duration-300 hover:scale-105"
@@ -303,6 +313,21 @@ export function Navbar() {
             <span className="text-[var(--color-brand-graymuted)]/40">|</span>
             <span className={lang === "en" ? "text-[var(--color-brand-gold)]" : "text-[var(--color-brand-graymuted)]"}>EN</span>
           </button>
+
+          {/* Staff / admin access mobile */}
+          <Link
+            to="/admin"
+            className="flex items-center gap-2 font-sans text-sm font-semibold tracking-widest uppercase text-[var(--color-brand-graymuted)] hover:text-[var(--color-brand-gold)] mt-1"
+            style={{
+              transition: 'all 0.4s cubic-bezier(0.22,1,0.36,1)',
+              transitionDelay: mobileMenuOpen ? "460ms" : "0ms",
+              opacity: mobileMenuOpen ? 1 : 0,
+              transform: mobileMenuOpen ? "translateY(0)" : "translateY(20px)"
+            }}
+          >
+            <LogIn size={16} />
+            {lang === "es" ? "Ingreso al panel" : "Staff login"}
+          </Link>
         </nav>
       </div>
     </>
