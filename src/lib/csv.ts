@@ -25,8 +25,10 @@ export function toCSV<T>(columns: CsvColumn<T>[], rows: T[]): string {
 }
 
 export function downloadCSV(filename: string, csv: string): void {
-  // Prepend UTF-8 BOM so Excel renders accents (á, ñ...) correctly.
-  const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
+  // UTF-8 BOM so Excel renders accents (á, ñ...) correctly, plus a "sep=,"
+  // hint line so Excel splits columns even on locales whose list separator
+  // is ";" (Spanish Windows) — otherwise everything lands in one column.
+  const blob = new Blob(["﻿" + "sep=,\r\n" + csv], { type: "text/csv;charset=utf-8;" });
   triggerDownload(filename, blob);
 }
 

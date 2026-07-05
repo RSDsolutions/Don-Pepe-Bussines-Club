@@ -48,6 +48,7 @@ seguridad real la aplican las políticas RLS de la base de datos.
 | Órdenes        | `/admin/ordenes`        | Historial de ventas, detalle de items, cambio de estado. |
 | Inventario     | `/admin/inventario`     | Existencias y registro de movimientos (entradas/salidas/ajustes). |
 | Contabilidad   | `/admin/contabilidad`   | Libro de ingresos y gastos con balance por período. |
+| Reportes       | `/admin/reportes`       | Exporta órdenes, contabilidad e inventario en CSV o PDF; resumen contable del período en PDF. |
 
 ## Cómo se conecta con la tienda
 
